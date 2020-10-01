@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/APOP_LOGO_FINAL"/>
+        android:src="@drawable/apop_logo"
+        android:layout_marginTop="40dp"/>
 
     <EditText
         android:id="@+id/id_username"
-        android:hint="Username"
+        android:layout_above="@id/id_password"
+        android:hint="@string/user_hint"
+        android:importantForAutofill="no"
+        android:textColor="@color/colorDarkBlue"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/edittext_height"
         android:background="@drawable/rounded_edittext"
         android:inputType="text"
-        android:autofillHints="Username"
+        android:layout_marginTop="120dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
@@ -28,12 +31,30 @@
 
     <EditText
         android:id="@+id/id_password"
-        android:hint="Password"
+        android:layout_above="@id/id_submit"
+        android:hint="@string/pass_hint"
+        android:importantForAutofill="no"
+        android:textColor="@color/colorDarkBlue"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/edittext_height"
         android:background="@drawable/rounded_edittext"
+        android:inputType="textPassword"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:padding="20dp"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/id_submit"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit_button"
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edittext_height"
+        android:background="@drawable/rounded_edittext"
+        android:backgroundTint="@color/colorDarkBlue"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>

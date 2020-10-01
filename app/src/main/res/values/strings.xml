@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">APOP</string>
+    <string name="user_hint">Username</string>
+    <string name="pass_hint">Password</string>
+    <string name="submit_button">SUBMIT</string>
+    <string-array name="test_dropdown">
+        <item>Lab</item>
+        <item>Golden Retriever</item>
+        <item>Yorki</item>
+        <item>Beagle</item>
+        <item>Lab</item>
+        <item>Golden Retriever</item>
+        <item>Yorki</item>
+        <item>Beagle</item>
+        <item>Lab</item>
+        <item>Golden Retriever</item>
+        <item>Yorki</item>
+        <item>Beagle</item>
+        <item>Lab</item>
+        <item>Golden Retriever</item>
+        <item>Yorki</item>
+        <item>Beagle</item>
+    </string-array>
 </resources>
