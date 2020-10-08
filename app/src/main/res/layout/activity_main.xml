@@ -24,8 +24,8 @@
         android:background="@drawable/rounded_edittext"
         android:inputType="text"
         android:layout_marginTop="120dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="@dimen/edittext_margin"
+        android:layout_marginEnd="@dimen/edittext_margin"
         android:layout_marginBottom="20dp"
         android:padding="20dp"/>
 
@@ -39,8 +39,8 @@
         android:layout_height="@dimen/edittext_height"
         android:background="@drawable/rounded_edittext"
         android:inputType="textPassword"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="@dimen/edittext_margin"
+        android:layout_marginEnd="@dimen/edittext_margin"
         android:layout_marginBottom="20dp"
         android:padding="20dp"/>
 
@@ -53,8 +53,8 @@
         android:layout_height="@dimen/edittext_height"
         android:background="@drawable/rounded_edittext"
         android:backgroundTint="@color/colorDarkBlue"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="@dimen/edittext_margin"
+        android:layout_marginEnd="@dimen/edittext_margin"
         android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>

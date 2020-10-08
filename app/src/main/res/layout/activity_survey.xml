@@ -10,7 +10,10 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
         <TextView
             android:id="@+id/id_title"
             android:layout_width="match_parent"
@@ -18,52 +21,303 @@
             android:text="PET SURVEY??"
             android:textAlignment="center"
             android:textSize="50dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pet Name"
             android:textSize="@dimen/label_text_size"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
         <EditText
+            android:id="@+id/id_pet_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             android:background="@drawable/rounded_edittext"
             android:textColor="@color/colorDarkBlue"
             android:inputType="text"
-            android:padding="20dp"/>
+            android:importantForAutofill="no"
+            android:hint="Roofus"
+            android:padding="@dimen/edittext_padding"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
 
         <RadioGroup
+            android:id="@+id/id_pet_type_group"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp">
+            android:layout_gravity="center"
+            android:scaleY="2"
+            android:scaleX="2"
+            android:layout_marginBottom="@dimen/gap_margin"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_weight="1"
-                android:text="DOG"
-                android:paddingStart="30dp"/>
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Dog"
+                android:layout_marginEnd="10dp"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="CAT"/>
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Cat"
+                android:layout_marginStart="5dp"/>
         </RadioGroup>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Breed"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
 
         <Spinner
-            android:id="@+id/id_testSpinner"
+            android:id="@+id/id_breed"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"/>
+            android:layout_height="@dimen/edittext_height"
+            android:background="@drawable/rounded_edittext"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"/>
+
+        <TextView
+            android:id="@+id/id_spinner_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="yooooo"
+            android:textColor="@color/colorDarkBlue"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:layout_marginTop="-45dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginTop="75dp"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <EditText
+            android:id="@+id/id_age"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="@color/colorDarkBlue"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:hint="Roofus"
+            android:padding="@dimen/edittext_padding"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <RadioGroup
+            android:id="@+id/id_gender_group"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="120dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Female Spayed"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Female"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Male Neutered"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorDarkBlue"
+                android:text="Male"/>
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Dogs in Household"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
 
         <SeekBar
-            android:id="@+id/id_testSeekbar"
+            android:id="@+id/id_num_dogs"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="50dp"
+            android:minHeight="10dp"
+            android:max="5"
+            android:thumb="@drawable/seekbar_thumb"
+            android:tickMark="@drawable/seekbar_tickmark"
+            android:progressTint="@android:color/transparent"
+            android:paddingStart="@dimen/edittext_margin"
+            android:paddingEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Cats in Household"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <SeekBar
+            android:id="@+id/id_num_cats"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="10dp"
+            android:max="5"
+            android:thumb="@drawable/seekbar_thumb"
+            android:tickMark="@drawable/seekbar_tickmark"
+            android:progressTint="@android:color/transparent"
+            android:paddingStart="@dimen/edittext_margin"
+            android:paddingEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner Weight Assessment"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <SeekBar
+            android:id="@+id/id_owner_weight"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="10dp"
+            android:max="4"
+            android:thumb="@drawable/seekbar_thumb"
+            android:tickMark="@drawable/seekbar_tickmark"
+            android:progressTint="@android:color/transparent"
+            android:paddingStart="@dimen/edittext_margin"
+            android:paddingEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Body Condition Scoring System"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <SeekBar
+            android:id="@+id/id_bcss"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="10dp"
+            android:max="8"
+            android:thumb="@drawable/seekbar_thumb"
+            android:tickMark="@drawable/seekbar_tickmark"
+            android:progressTint="@android:color/transparent"
+            android:paddingStart="@dimen/edittext_margin"
+            android:paddingEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <EditText
+            android:id="@+id/id_weight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="@color/colorDarkBlue"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:hint="Roofus"
+            android:padding="@dimen/edittext_padding"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous Medical Conditions"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <EditText
+            android:id="@+id/id_medical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/multiline_edittext"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:scrollbars="vertical"
+            android:gravity="top|start"
+            android:textColor="@color/colorDarkBlue"
+            android:importantForAutofill="no"
+            android:hint="Roofus"
+            android:padding="@dimen/edittext_padding"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="@dimen/label_text_size"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
+        <EditText
+            android:id="@+id/id_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/multiline_edittext"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:scrollbars="vertical"
+            android:gravity="top|start"
+            android:textColor="@color/colorDarkBlue"
+            android:importantForAutofill="no"
+            android:hint="Roofus"
+            android:padding="@dimen/edittext_padding"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"/>
+
+        <Button
+            android:id="@+id/id_submit"
+            android:text="@string/submit_button"
+            android:textColor="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:background="@drawable/rounded_edittext"
+            android:backgroundTint="@color/colorDarkBlue"
+            android:layout_marginStart="@dimen/edittext_margin"
+            android:layout_marginEnd="@dimen/edittext_margin"
+            android:layout_marginBottom="50dp"/>
     </LinearLayout>
 </ScrollView>
