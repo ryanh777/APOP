@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
 public class SubmissionActivity extends AppCompatActivity {
 
     @Override
@@ -47,6 +49,10 @@ public class SubmissionActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Submitter submitter = new Submitter(getApplicationContext());
+                JSONObject submissionJSON = submitter.makeJSON(petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+                submitter.uploadFile(submissionJSON);
+
                 Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
                 startActivity(surveyActivity);
             }
