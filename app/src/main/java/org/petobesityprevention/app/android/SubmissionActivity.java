@@ -49,9 +49,9 @@ public class SubmissionActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Submitter submitter = new Submitter(getApplicationContext());
-                JSONObject submissionJSON = submitter.makeJSON(petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
-                submitter.uploadFile(submissionJSON);
+                // make JSON from submission data and upload
+                JSONObject submissionJSON = JSONFactory.makeSurveyJSON(petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+                SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);
 
                 Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
                 startActivity(surveyActivity);
