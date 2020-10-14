@@ -8,7 +8,10 @@ import com.amplifyframework.core.Amplify;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Credentials {
 
@@ -83,14 +86,27 @@ public class Credentials {
         // compare (name, password) with online (get)
         // fix the names in this
         // key is name of file
-        //"Users/Example.json"
+
+
+
         Amplify.Storage.downloadFile(
                 key,
                 new File(context.getFilesDir() + "/credentials.json"),
-                result -> Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName()),
-                error -> Log.e("MyAmplifyApp",  "Download Failure", error)
+                result -> Log.i("APOPapp", "Successfully downloaded: " + result.getFile().getName()),
+                error -> Log.e("APOPapp",  "Download Failure", error)
         );
 
+        //TODO
+        // need to wait for download
+        File credentials = new File(context.getFilesDir() + "/credentials.json");
+        try {
+            FileReader reader = new FileReader(credentials);
+            Log.i("APOPapp", "Reading Credentials " + (char)reader.read());
+        } catch (FileNotFoundException e) {
+            Log.e("APOPapp", "Credentials File not created");
+        } catch (IOException e) {
+            Log.e("APOPapp", "Credentials Read Error");
+        }
         //TODO compare with filereader
         return true;
     }
