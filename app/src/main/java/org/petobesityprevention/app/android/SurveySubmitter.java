@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class SurveySubmitter {
 
     protected static void uploadFile(Context context, JSONObject surveyJSON) {
-        String surveyKey = KeyFactory.makeSurveyKey() + ".json";
+        String surveyKey = KeyFactory.makeSurveyKey(surveyJSON) + ".json";
 
         File surveyFile = new File(context.getFilesDir(), surveyKey);
 
@@ -23,11 +23,11 @@ public class SurveySubmitter {
             writer.close();
         }
         catch (Exception ex) {
-            Log.e("APOPapp", "Upload Failed", ex);
+            Log.e("APOPapp", "File write failed", ex);
         }
 
         Amplify.Storage.uploadFile(
-                surveyKey,
+                "Surveys/" + surveyKey,
                 surveyFile,
                 result -> Log.i("APOPapp", "Successfuly uploaded: " + result.getKey()),
                 storageFailure -> Log.e("APOPapp", "Upload failed", storageFailure)

@@ -5,13 +5,15 @@ import org.json.JSONObject;
 
 public class JSONFactory {
 
-    protected static JSONObject makeSurveyJSON(String petName, String petType, String breed,
+    protected static JSONObject makeSurveyJSON(String org, String deviceID, String petName, String petType, String breed,
                                   String age, String gender, String numDogs,
                                   String numCats, String ownerWeight, String bcss,
                                   String weight, String medical, String comments) {
         JSONObject json = new JSONObject();
 
         try {
+            json.put("org", org);
+            json.put("device_id", deviceID);
             json.put("name", petName);
             json.put("type", petType);
             json.put("breed", breed);
@@ -31,8 +33,17 @@ public class JSONFactory {
         return json;
     }
 
-    public static JSONObject makeCredentialsJSON() {
-        // TODO
-        return null;
+    public static JSONObject makeCredentialsJSON(String org, String password) {
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("org", org);
+            json.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 }

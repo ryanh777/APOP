@@ -12,6 +12,31 @@ import java.io.FileWriter;
 
 public class Credentials {
 
+    private static Credentials credentials;
+    private static String org;
+    private static String deviceID;
+
+    private Credentials(String o, String d) {
+        org = o;
+        deviceID = d;
+    }
+
+    public static void setCredentials(String o, String d) {
+        credentials = new Credentials(o, d);
+    }
+
+    public static Credentials getCredentials() {
+        return credentials;
+    }
+
+    public static String getDeviceID() {
+        return deviceID;
+    }
+
+    public static String getOrg() {
+        return org;
+    }
+
     private static File makeCredentialsFile(Context context, String key) {
         //TODO
         // make json?
@@ -29,22 +54,44 @@ public class Credentials {
         return credFile;
     }
 
-    protected static void submitCredentials() {
+    protected static void submitCredentials(Context context, JSONObject userJSON) {
         //TODO
         // send created (registered) credentials
+        String userKey = "Users/" + KeyFactory.makeUserKey("1", "vets") + ".json";
+
+        File userFile = new File(context.getFilesDir(), userKey);
+
+        try {
+            FileWriter writer = new FileWriter(userFile);
+            writer.write(userJSON.toString());
+            writer.close();
+        }
+        catch (Exception ex) {
+            Log.e("APOPapp", "Upload Failed", ex);
+        }
+
+        Amplify.Storage.uploadFile(
+                userKey,
+                userFile,
+                result -> Log.i("APOPapp", "Successfuly uploaded: " + result.getKey()),
+                storageFailure -> Log.e("APOPapp", "Upload failed", storageFailure)
+        );
     }
 
-    protected boolean checkCredentials(Context context, String key) {
+    protected static boolean checkCredentials(Context context, String key) {
         //TODO
         // compare (name, password) with online (get)
         // fix the names in this
+        // key is name of file
+        //"Users/Example.json"
         Amplify.Storage.downloadFile(
                 key,
-                new File(context.getFilesDir() + "/download.txt"),
+                new File(context.getFilesDir() + "/credentials.json"),
                 result -> Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName()),
                 error -> Log.e("MyAmplifyApp",  "Download Failure", error)
         );
 
+        //TODO compare with filereader
         return true;
     }
 

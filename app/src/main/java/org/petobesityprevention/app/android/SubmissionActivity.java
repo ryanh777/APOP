@@ -50,7 +50,12 @@ public class SubmissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // make JSON from submission data and upload
-                JSONObject submissionJSON = JSONFactory.makeSurveyJSON(petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+                
+                // TODO get this from credentials
+                String org = Credentials.getOrg();
+                String deviceID = Credentials.getDeviceID();
+                
+                JSONObject submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID, petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);
 
                 Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
