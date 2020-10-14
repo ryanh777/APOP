@@ -87,8 +87,6 @@ public class Credentials {
         // fix the names in this
         // key is name of file
 
-
-
         Amplify.Storage.downloadFile(
                 key,
                 new File(context.getFilesDir() + "/credentials.json"),

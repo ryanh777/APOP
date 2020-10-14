@@ -50,8 +50,7 @@ public class SubmissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // make JSON from submission data and upload
-                
-                // TODO get this from credentials
+
                 String org = Credentials.getOrg();
                 String deviceID = Credentials.getDeviceID();
                 
