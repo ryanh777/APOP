@@ -17,6 +17,7 @@
         android:id="@+id/id_username"
         android:layout_above="@id/id_password"
         android:hint="@string/user_hint"
+        android:textColorHint="@color/colorDarkBlue"
         android:importantForAutofill="no"
         android:textColor="@color/colorDarkBlue"
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         android:layout_marginBottom="20dp"
         android:padding="20dp"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/id_password"
         android:layout_above="@id/id_submit"
         android:hint="@string/pass_hint"
@@ -37,10 +38,8 @@
         android:textColor="@color/colorDarkBlue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edittext_height"
-        android:background="@drawable/rounded_edittext"
         android:inputType="textPassword"
-        android:layout_marginStart="@dimen/edittext_margin"
-        android:layout_marginEnd="@dimen/edittext_margin"
+        android:layout_marginHorizontal="@dimen/edittext_margin"
         android:layout_marginBottom="20dp"
         android:padding="20dp"/>
 
@@ -53,8 +52,7 @@
         android:layout_height="@dimen/edittext_height"
         android:background="@drawable/rounded_edittext"
         android:backgroundTint="@color/colorDarkBlue"
-        android:layout_marginStart="@dimen/edittext_margin"
-        android:layout_marginEnd="@dimen/edittext_margin"
+        android:layout_marginHorizontal="@dimen/edittext_margin"
         android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>

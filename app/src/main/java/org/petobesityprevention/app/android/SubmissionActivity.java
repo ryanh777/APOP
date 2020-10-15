@@ -43,7 +43,7 @@ public class SubmissionActivity extends AppCompatActivity {
                 + "Previous Medical Conditions: " + medical + '\n'
                 + "Comments: " + comments + '\n');
 
-        Button submit = findViewById(R.id.id_submit);
+        Button submit = findViewById(R.id.id_go_back);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

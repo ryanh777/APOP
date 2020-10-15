@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="PET SURVEY??"
             android:textAlignment="center"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="@dimen/gap_margin"/>
 
@@ -91,7 +91,6 @@
             android:id="@+id/id_spinner_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="yooooo"
             android:textColor="@color/colorDarkBlue"
             android:textSize="@dimen/label_text_size"
             android:layout_marginStart="@dimen/label_text_margin_start"
@@ -166,6 +165,7 @@
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="5"
+
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
