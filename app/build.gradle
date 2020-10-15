@@ -14,6 +14,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,4 +37,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // amplify for aws
+    implementation 'com.amplifyframework:core:1.4.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    implementation 'com.amplifyframework:aws-storage-s3:1.4.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.4.0'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    // need 1.1 NOT 1.1.1
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }

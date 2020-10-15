@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "apop7754d185": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "s326369b83": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}
