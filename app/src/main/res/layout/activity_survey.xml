@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SurveyActivity"
     android:background="@color/colorBackground">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,33 +26,45 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_pet_name"
+            android:layout_below="@id/id_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextShadow"
             android:text="Pet Name"
-            android:textSize="@dimen/label_text_size"
             android:layout_marginStart="@dimen/label_text_margin_start"
             android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
 
-        <EditText
-            android:id="@+id/id_pet_name"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_petname_card"
+            android:layout_below="@id/id_label_pet_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="@color/colorDarkBlue"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:hint="Roofus"
-            android:padding="@dimen/edittext_padding"
-            android:layout_marginStart="@dimen/edittext_margin"
-            android:layout_marginEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_pet_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
 
         <RadioGroup
             android:id="@+id/id_pet_type_group"
+            android:layout_below="@id/id_petname_card"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:scaleY="2"
             android:scaleX="2"
             android:layout_marginBottom="@dimen/gap_margin"
@@ -72,6 +85,8 @@
         </RadioGroup>
 
         <TextView
+            android:id="@+id/id_label_breed"
+            android:layout_below="@id/id_pet_type_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Breed"
@@ -81,6 +96,7 @@
 
         <Spinner
             android:id="@+id/id_breed"
+            android:layout_below="@id/id_label_breed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             android:background="@drawable/rounded_edittext"
@@ -89,42 +105,56 @@
 
         <TextView
             android:id="@+id/id_spinner_text"
+            android:layout_below="@id/id_label_breed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkBlue"
+            android:text="yoooo"
             android:textSize="@dimen/label_text_size"
             android:layout_marginStart="@dimen/label_text_margin_start"
-            android:layout_marginTop="-45dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
+            android:id="@+id/id_label_age"
+            android:layout_below="@id/id_breed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Age"
             android:layout_marginStart="@dimen/label_text_margin_start"
             android:textSize="@dimen/label_text_size"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="@dimen/gap_margin"
             android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
 
-        <EditText
-            android:id="@+id/id_age"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_age_card"
+            android:layout_below="@id/id_label_age"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="@color/colorDarkBlue"
-            android:inputType="number"
-            android:importantForAutofill="no"
-            android:hint="Roofus"
-            android:padding="@dimen/edittext_padding"
-            android:layout_marginStart="@dimen/edittext_margin"
-            android:layout_marginEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
 
         <RadioGroup
             android:id="@+id/id_gender_group"
+            android:layout_below="@id/id_age_card"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:scaleX="2"
             android:scaleY="2"
             android:layout_marginTop="70dp"
@@ -152,6 +182,8 @@
         </RadioGroup>
 
         <TextView
+            android:id="@+id/id_label_num_dogs"
+            android:layout_below="@id/id_gender_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Number of Dogs in Household"
@@ -161,11 +193,11 @@
 
         <SeekBar
             android:id="@+id/id_num_dogs"
+            android:layout_below="@id/id_label_num_dogs"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="5"
-
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
@@ -174,6 +206,8 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_num_cats"
+            android:layout_below="@id/id_num_dogs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Number of Cats in Household"
@@ -183,6 +217,7 @@
 
         <SeekBar
             android:id="@+id/id_num_cats"
+            android:layout_below="@id/id_label_num_cats"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="10dp"
@@ -195,6 +230,8 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_owner_weight"
+            android:layout_below="@id/id_num_cats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Owner Weight Assessment"
@@ -204,6 +241,7 @@
 
         <SeekBar
             android:id="@+id/id_owner_weight"
+            android:layout_below="@id/id_label_owner_weight"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="10dp"
@@ -216,6 +254,8 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_bcss"
+            android:layout_below="@id/id_owner_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Body Condition Scoring System"
@@ -225,6 +265,7 @@
 
         <SeekBar
             android:id="@+id/id_bcss"
+            android:layout_below="@id/id_label_bcss"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="10dp"
@@ -237,6 +278,8 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_weight"
+            android:layout_below="@id/id_bcss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Weight"
@@ -244,21 +287,32 @@
             android:textSize="@dimen/label_text_size"
             android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
 
-        <EditText
-            android:id="@+id/id_weight"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_weight_card"
+            android:layout_below="@id/id_label_weight"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="@color/colorDarkBlue"
-            android:inputType="number"
-            android:importantForAutofill="no"
-            android:hint="Roofus"
-            android:padding="@dimen/edittext_padding"
-            android:layout_marginStart="@dimen/edittext_margin"
-            android:layout_marginEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/id_label_medical"
+            android:layout_below="@id/id_weight_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Previous Medical Conditions"
@@ -268,6 +322,7 @@
 
         <EditText
             android:id="@+id/id_medical"
+            android:layout_below="@id/id_label_medical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/multiline_edittext"
@@ -284,6 +339,8 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
+            android:id="@+id/id_label_comments"
+            android:layout_below="@id/id_medical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comments"
@@ -293,6 +350,7 @@
 
         <EditText
             android:id="@+id/id_comments"
+            android:layout_below="@id/id_label_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/multiline_edittext"
@@ -308,16 +366,22 @@
             android:layout_marginEnd="@dimen/edittext_margin"
             android:layout_marginBottom="@dimen/gap_margin"/>
 
-        <Button
-            android:id="@+id/id_submit"
-            android:text="@string/submit_button"
-            android:textColor="@color/colorWhite"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_submit_card"
+            android:layout_below="@id/id_comments"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
-            android:background="@drawable/rounded_edittext"
-            android:backgroundTint="@color/colorDarkBlue"
-            android:layout_marginStart="@dimen/edittext_margin"
-            android:layout_marginEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="50dp"/>
-    </LinearLayout>
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorDarkBlue">
+            <Button
+                android:id="@+id/id_submit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:text="SUBMIT"/>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </ScrollView>
