@@ -3,9 +3,10 @@
     <dimen name="edittext_height">60dp</dimen>
     <dimen name="edittext_margin">30dp</dimen>
     <dimen name="edittext_padding">20dp</dimen>
-    <dimen name="label_text_size">20sp</dimen>
+    <dimen name="label_text_size">25sp</dimen>
     <dimen name="label_text_margin_start">50dp</dimen>
     <dimen name="label_text_margin_bottom">2dp</dimen>
     <dimen name="gap_margin">30dp</dimen>
-    <dimen name="multiline_height">120dp</dimen>
+    <dimen name="login_gap">15dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

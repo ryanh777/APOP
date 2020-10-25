@@ -1,7 +1,5 @@
 package org.petobesityprevention.app.android;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.UUID;
 
@@ -26,8 +21,15 @@ public class MainActivity extends AppCompatActivity {
         EditText username = findViewById(R.id.id_username);
         EditText password = findViewById(R.id.id_password);
 
-        Button submitButton = findViewById(R.id.id_submit);
-        submitButton.setOnClickListener(new View.OnClickListener() {
+//        username.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                username.setCursorVisible(true);
+//            }
+//        });
+
+        Button loginButton = findViewById(R.id.id_login);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -43,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
                 startActivity(surveyActivity);
+            }
+        });
+
+        Button signupButton = findViewById(R.id.id_signup);
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent accountCreationActivity = new Intent(getApplicationContext(), AccountCreationActivity.class);
+                startActivity(accountCreationActivity);
             }
         });
     }

@@ -45,7 +45,7 @@ public class SubmissionActivity extends AppCompatActivity {
                 + "Previous Medical Conditions: " + medical + '\n'
                 + "Comments: " + comments + '\n');
 
-        Button submit = findViewById(R.id.id_go_back);
+        Button submit = findViewById(R.id.id_submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +59,14 @@ public class SubmissionActivity extends AppCompatActivity {
 
                 Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
                 startActivity(surveyActivity);
+            }
+        });
+
+        Button goBack = findViewById(R.id.id_go_back);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

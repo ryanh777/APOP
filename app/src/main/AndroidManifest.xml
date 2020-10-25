@@ -2,15 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.petobesityprevention.app.android">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
     <application
         android:name=".APOPapp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".SubmissionActivity"></activity>
+
+        <activity android:name=".AccountCreationActivity"/>
+        <activity android:name=".SubmissionActivity" />
         <activity android:name=".SurveyActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
