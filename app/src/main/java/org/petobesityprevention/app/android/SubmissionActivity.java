@@ -57,8 +57,8 @@ public class SubmissionActivity extends AppCompatActivity {
                 JSONObject submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID, petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);
 
-                Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
-                startActivity(surveyActivity);
+                Intent thankyouActivity = new Intent(getApplicationContext(), ThankYouActivity.class);
+                startActivity(thankyouActivity);
             }
         });
 
