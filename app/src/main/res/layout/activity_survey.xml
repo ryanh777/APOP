@@ -141,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:importantForAutofill="no"
                 android:paddingHorizontal="20dp"
                 android:textColorHint="#c7c7c7"
