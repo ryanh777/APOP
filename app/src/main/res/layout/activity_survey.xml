@@ -158,7 +158,7 @@
         </androidx.cardview.widget.CardView>
 
         <RadioGroup
-            android:id="@+id/id_gender_group"
+            android:id="@+id/id_sex_group"
             android:layout_below="@id/id_weight_card"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
 
         <TextView
             android:id="@+id/id_label_breed"
-            android:layout_below="@id/id_gender_group"
+            android:layout_below="@id/id_sex_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Breed"

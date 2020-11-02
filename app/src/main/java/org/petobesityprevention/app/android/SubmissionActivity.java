@@ -1,5 +1,6 @@
 package org.petobesityprevention.app.android;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,36 +13,41 @@ import org.json.JSONObject;
 
 public class SubmissionActivity extends AppCompatActivity {
 
+    // Ugly warning suppression
+    @SuppressLint("SetTextI18n")
+
+    // Start
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
 
+        // Get values from previous state
         String petName = getIntent().getExtras().getString("PET_NAME");
         String petType = getIntent().getExtras().getString("PET_TYPE");
+        int age = getIntent().getExtras().getInt("AGE");
+        int weight = getIntent().getExtras().getInt("WEIGHT");
+        String sex = getIntent().getExtras().getString("SEX");
         String breed = getIntent().getExtras().getString("BREED");
-        String age = getIntent().getExtras().getString("AGE");
-        String gender = getIntent().getExtras().getString("GENDER");
-        String numDogs = getIntent().getExtras().getString("NUM_DOGS");
-        String numCats = getIntent().getExtras().getString("NUM_CATS");
-        String ownerWeight = getIntent().getExtras().getString("OWNER_WEIGHT");
-        String bcss = getIntent().getExtras().getString("BCSS");
-        String weight = getIntent().getExtras().getString("WEIGHT");
+        int numDogs = getIntent().getExtras().getInt("NUM_DOGS");
+        int numCats = getIntent().getExtras().getInt("NUM_CATS");
+        int ownerWeight = getIntent().getExtras().getInt("OWNER_WEIGHT");
+        int bcss = getIntent().getExtras().getInt("BCSS");
         String medical = getIntent().getExtras().getString("MEDICAL");
         String comments = getIntent().getExtras().getString("COMMENTS");
 
-
+        // Set the data confirmation text
         TextView tv = findViewById(R.id.id_test_data_pass);
         tv.setText("Pet Name: " + petName + '\n'
                 + "Pet Type: " + petType + '\n'
-                + "Breed: " + breed + '\n'
                 + "Age: " + age + '\n'
-                + "Gender: " + gender + '\n'
+                + "Weight: " + weight + '\n'
+                + "Sex: " + sex + '\n'
+                + "Breed: " + breed + '\n'
                 + "Number of Dogs in Household: " + numDogs + '\n'
                 + "Number of Cats in Household: " + numCats + '\n'
                 + "Owner Weight Assessment: " + ownerWeight + '\n'
                 + "Body Condition Scoring System: " + bcss + '\n'
-                + "Weight: " + weight + '\n'
                 + "Previous Medical Conditions: " + medical + '\n'
                 + "Comments: " + comments + '\n');
 
@@ -57,7 +63,8 @@ public class SubmissionActivity extends AppCompatActivity {
                 String deviceID = Credentials.getDeviceID();
 
                 // make JSON
-                SurveyJSON submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID, petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+                SurveyJSON submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID,
+                        petName, petType, age, weight, sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
 
                 // upload JSON file
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);

@@ -5,7 +5,6 @@ import android.util.Log;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
 
 import javax.crypto.SecretKeyFactory;
 
@@ -31,8 +30,8 @@ public class KeyFactory {
                 result.append(String.format("%02x", aByte));
             }
             return result.toString();
-
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e) {
             Log.e("APOP App", "NO SUCH HASHING ALGORITHM");
             return "SURVEY_" + org + "_" + device_id + "_" + petName + "_" + time;
         }

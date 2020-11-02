@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 public class JSONFactory {
 
     // Make survey JSON object to submit to S3
-    protected static SurveyJSON makeSurveyJSON(String org, String deviceID, String petName, String petType, String breed,
-                                  String age, String gender, String numDogs,
-                                  String numCats, String ownerWeight, String bcss,
-                                  String weight, String medical, String comments) {
+    protected static SurveyJSON makeSurveyJSON(String org, String deviceID, String petName, String petType,
+                                               int age, int weight, String sex, String breed,
+                                               int numDogs, int numCats, int ownerWeight, int bcss,
+                                               String medical, String comments) {
 
         // Want to keep time consistent, so we only call this once here
         String time = LocalDateTime.now().toString();
@@ -21,6 +21,7 @@ public class JSONFactory {
         // make the key (aka filename or id) for the survey
         String key = KeyFactory.makeSurveyKey(petName, org, deviceID, time);
 
+        // Construct
         SurveyJSON json = new SurveyJSON(key);
 
         // Enter data
@@ -29,16 +30,16 @@ public class JSONFactory {
             json.put("org", org);
             json.put("device_id", deviceID);
             json.put("time", time);
-            json.put("name", petName);
+            json.put("pet_name", petName);
             json.put("type", petType);
             json.put("breed", breed);
             json.put("age", age);
-            json.put("gender", gender);
+            json.put("sex", sex);
             json.put("weight", weight);
-            json.put("num_dogs", numDogs);
-            json.put("num_cats", numCats);
             json.put("owner_assess", ownerWeight);
             json.put("bcss", bcss);
+            json.put("num_dogs", numDogs);
+            json.put("num_cats", numCats);
             json.put("medical", medical);
             json.put("comments", comments);
         } catch (JSONException e) {
