@@ -9,83 +9,71 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Credentials {
 
+    // Credentials fields
     private static Credentials credentials;
     private static String org;
     private static String deviceID;
+    private static String model;
 
+    // Constructor
     private Credentials(String o, String d) {
         org = o;
         deviceID = d;
+        model = android.os.Build.MODEL;
     }
 
-    public static void setCredentials(String o, String d) {
-        credentials = new Credentials(o, d);
-    }
+    // Setter
+    public static void setCredentials(String o, String d) { credentials = new Credentials(o, d); }
 
-    public static Credentials getCredentials() {
-        return credentials;
-    }
+    // Getters
+    public static Credentials getCredentials() { return credentials; }
+    public static String getOrg() { return org; }
+    public static String getDeviceID() { return deviceID; }
+    public static String getModel() { return model; }
 
-    public static String getDeviceID() {
-        return deviceID;
-    }
+    // Register device upon account login
+    protected static void registerDeviceToOrg(Context context) {
 
-    public static String getOrg() {
-        return org;
-    }
+        // Make file name from user info
+        String userKey = "Users/" + KeyFactory.makeUserKey(org, deviceID, model) + ".json";
 
-    private static File makeCredentialsFile(Context context, String key) {
-        //TODO
-        // make json?
-        File credFile = new File(context.getFilesDir(), key);
-
-        try {
-            FileWriter writer = new FileWriter(credFile);
-            writer.write("");
-            writer.close();
-        }
-        catch (Exception ex) {
-            Log.e("APOPapp", "Credentials Creation Error", ex);
-        }
-
-        return credFile;
-    }
-
-    protected static void submitCredentials(Context context, JSONObject userJSON) {
-        //TODO
-        // send created (registered) credentials
-        String userKey = "Users/" + KeyFactory.makeUserKey("1", "vets") + ".json";
-
+        // Make the file and its JSON content
         File userFile = new File(context.getFilesDir(), userKey);
+        JSONObject userJSON = JSONFactory.makeUserJSON(org, deviceID, model);
 
         try {
+            // Write the file
             FileWriter writer = new FileWriter(userFile);
             writer.write(userJSON.toString());
             writer.close();
         }
         catch (Exception ex) {
-            Log.e("APOPapp", "Upload Failed", ex);
+            Log.e("APOPapp", "Credentials file creation failed", ex);
+            return; // Don't try to upload broken file
         }
 
+        // Upload the file
         Amplify.Storage.uploadFile(
                 userKey,
                 userFile,
-                result -> Log.i("APOPapp", "Successfuly uploaded: " + result.getKey()),
-                storageFailure -> Log.e("APOPapp", "Upload failed", storageFailure)
+                result -> Log.i("APOPapp", "Successfuly uploaded credentials: " + result.getKey()),
+                storageFailure -> Log.e("APOPapp", "Credentials upload failed", storageFailure)
         );
     }
 
+
+
+
+    //TODO
+    // Compare org Username and Password to login
     protected static boolean checkCredentials(Context context, String key) {
-        //TODO
-        // compare (name, password) with online (get)
-        // fix the names in this
-        // key is name of file
 
         Amplify.Storage.downloadFile(
                 key,
@@ -101,17 +89,25 @@ public class Credentials {
             FileReader reader = new FileReader(credentials);
             Log.i("APOPapp", "Reading Credentials " + (char)reader.read());
         } catch (FileNotFoundException e) {
-            Log.e("APOPapp", "Credentials File not created");
+            Log.e("APOPapp", "Credentials File not found");
         } catch (IOException e) {
-            Log.e("APOPapp", "Credentials Read Error");
+            Log.e("APOPapp", "Credentials I/O Error", e);
         }
         //TODO compare with filereader
         return true;
     }
 
-    protected void makeToken(File file) {
-        //TODO
-        // write a token to the filesystem that lasts a desired amount of time
+
+    //TODO
+    // write a token to the filesystem that lasts a desired amount of time
+    protected void makeToken(String name, Context context) {
+
+        try {
+            FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
+        }
+        catch (FileNotFoundException f) {
+            Log.e("APOP App", "Could not make token file");
+        }
     }
 
 }

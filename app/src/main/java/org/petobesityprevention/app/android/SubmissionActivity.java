@@ -45,23 +45,30 @@ public class SubmissionActivity extends AppCompatActivity {
                 + "Previous Medical Conditions: " + medical + '\n'
                 + "Comments: " + comments + '\n');
 
+        // add action to Submit button
         Button submit = findViewById(R.id.id_submit);
         submit.setOnClickListener(new View.OnClickListener() {
+            // make JSON from submission data and upload
             @Override
             public void onClick(View view) {
-                // make JSON from submission data and upload
 
+                // User info
                 String org = Credentials.getOrg();
                 String deviceID = Credentials.getDeviceID();
-                
-                JSONObject submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID, petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+
+                // make JSON
+                SurveyJSON submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID, petName, petType, breed, age, gender, numDogs, numCats, ownerWeight, bcss, weight, medical, comments);
+
+                // upload JSON file
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);
 
+                // go to thank you screen
                 Intent thankyouActivity = new Intent(getApplicationContext(), ThankYouActivity.class);
                 startActivity(thankyouActivity);
             }
         });
 
+        // go back to survey
         Button goBack = findViewById(R.id.id_go_back);
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override

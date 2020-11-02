@@ -1,45 +1,62 @@
 package org.petobesityprevention.app.android;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.util.Log;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
+import javax.crypto.SecretKeyFactory;
+
+
 public class KeyFactory {
-    protected static String makeSurveyKey(JSONObject json) {
-        //TODO
-        // make 20 character hex string key based on hashed data? + time
-        //hash((json.get("name") + )json.get("org") + json.get("device_id"), time)
 
-        // change error handling
-        String s = "";
-        try {
-            s = json.getString("name") + json.getString("org") + json.getString("device_id") + LocalDateTime.now().toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    // hashed string of data for naming surveys
+    protected static String makeSurveyKey(String petName, String org, String device_id, String time) {
 
-        MessageDigest digest = null;
-        byte[] hashKey = null;
         try {
-            digest = MessageDigest.getInstance("SHA-1");
-            hashKey = digest.digest(s.getBytes(StandardCharsets.UTF_8));
+            // get survey data
+            String data = petName + org + device_id + time;
+
+            // hash it with sha-1
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            byte[] hashKey = digest.digest(data.getBytes(StandardCharsets.UTF_8));
+
+            // build string
+            StringBuilder result = new StringBuilder();
+
+            for (byte aByte : hashKey) {
+                // make bytes into hex
+                result.append(String.format("%02x", aByte));
+            }
+            return result.toString();
+
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e("APOP App", "NO SUCH HASHING ALGORITHM");
+            return "SURVEY_" + org + "_" + device_id + "_" + petName + "_" + time;
         }
-
-        StringBuilder result = new StringBuilder();
-        for (byte aByte : hashKey) {
-            result.append(String.format("%02x", aByte));
-        }
-        return result.toString();
-
     }
 
-    protected static String makeUserKey(String deviceID, String org) {
-        return "USER_" + org + "_" + deviceID;
+
+    // File key for user database
+    protected static String makeUserKey(String org, String deviceID, String model) {
+        return "USER_" + org + "_" + deviceID + "_" + model;
+    }
+
+
+    //TODO
+    // how to do key exchange?
+    public static String hashPassword(String password) {
+        SecretKeyFactory keyFactory = null;
+        try
+        {
+            keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            return password;//keyFactory.generateSecret("");
+        }
+        catch (NoSuchAlgorithmException e) {
+            Log.e("APOP App", "NO SUCH HASHING ALGORITHM");
+            return null;
+        }
     }
 }

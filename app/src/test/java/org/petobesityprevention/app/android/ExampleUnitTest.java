@@ -11,7 +11,11 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void userKey_isCorrect() {
+        assertEquals(KeyFactory.makeUserKey("ORG", "ID", "ANDROID"), "USER_ORG_ID_ANDROID");
+    }
+    @Test
+    public void _isCorrect() {
+        assertEquals(true, true);
     }
 }

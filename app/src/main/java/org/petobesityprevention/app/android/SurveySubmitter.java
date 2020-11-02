@@ -8,24 +8,25 @@ import com.amplifyframework.core.Amplify;
 import java.io.File;
 import java.io.FileWriter;
 
-import org.json.JSONObject;
-
 public class SurveySubmitter {
 
-    protected static void uploadFile(Context context, JSONObject surveyJSON) {
-        String surveyKey = KeyFactory.makeSurveyKey(surveyJSON) + ".json";
+    protected static void uploadFile(Context context, SurveyJSON surveyJSON) {
 
+        // Make the file from the survey's key
+        String surveyKey =  surveyJSON.getKey() + ".json";
         File surveyFile = new File(context.getFilesDir(), surveyKey);
 
         try {
+            // Write the file
             FileWriter writer = new FileWriter(surveyFile);
             writer.write(surveyJSON.toString());
             writer.close();
         }
         catch (Exception ex) {
-            Log.e("APOPapp", "File write failed", ex);
+            Log.e("APOPapp", "Survey file write failed", ex);
         }
 
+        // Upload!
         Amplify.Storage.uploadFile(
                 "Surveys/" + surveyKey,
                 surveyFile,
@@ -34,4 +35,3 @@ public class SurveySubmitter {
         );
     }
 }
-
