@@ -4,15 +4,15 @@ import org.json.JSONObject;
 
 public class SurveyJSON extends JSONObject {
 
-    // We store the key of the survey to avoid computing it multiple times
-    private String key;
+    // We store the id key of the survey to avoid computing it multiple times
+    private String id;
 
-    public SurveyJSON(String key) {
+    public SurveyJSON(String id) {
         super();
-        this.key  = key;
+        this.id  = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getID() {
+        return id;
     }
 }

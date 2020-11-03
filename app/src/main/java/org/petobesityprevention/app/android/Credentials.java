@@ -38,11 +38,12 @@ public class Credentials {
     public static String getDeviceID() { return deviceID; }
     public static String getModel() { return model; }
 
+
     // Register device upon account login
     protected static void registerDeviceToOrg(Context context) {
 
         // Make file name from user info
-        String userKey = "Users/" + KeyFactory.makeUserKey(org, deviceID, model) + ".json";
+        String userKey = "Users/" + IDFactory.makeUserID(org, deviceID, model) + ".json";
 
         // Make the file and its JSON content
         File userFile = new File(context.getFilesDir(), userKey);
@@ -109,5 +110,4 @@ public class Credentials {
             Log.e("APOP App", "Could not make token file");
         }
     }
-
 }

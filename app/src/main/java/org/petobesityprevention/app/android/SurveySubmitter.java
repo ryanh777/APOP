@@ -12,8 +12,8 @@ public class SurveySubmitter {
 
     protected static void uploadFile(Context context, SurveyJSON surveyJSON) {
 
-        // Make the file from the survey's key
-        String surveyKey =  surveyJSON.getKey() + ".json";
+        // Make the file from the survey's id
+        String surveyKey =  surveyJSON.getID() + ".json";
         File surveyFile = new File(context.getFilesDir(), surveyKey);
 
         try {

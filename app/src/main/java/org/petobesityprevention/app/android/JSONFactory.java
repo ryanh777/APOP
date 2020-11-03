@@ -19,14 +19,14 @@ public class JSONFactory {
         String time = LocalDateTime.now().toString();
 
         // make the key (aka filename or id) for the survey
-        String key = KeyFactory.makeSurveyKey(petName, org, deviceID, time);
+        String id = IDFactory.makeSurveyID(petName, org, deviceID, time);
 
         // Construct
-        SurveyJSON json = new SurveyJSON(key);
+        SurveyJSON json = new SurveyJSON(id);
 
         // Enter data
         try {
-            json.put("survey_id", key); // File name
+            json.put("survey_id", id); // File name
             json.put("org", org);
             json.put("device_id", deviceID);
             json.put("time", time);
@@ -74,7 +74,7 @@ public class JSONFactory {
 
         try {
             json.put("org", org);
-            json.put("password", KeyFactory.hashPassword(password));
+            json.put("password", Password.hashPassword(password));
         } catch (JSONException e) {
             e.printStackTrace();
         }

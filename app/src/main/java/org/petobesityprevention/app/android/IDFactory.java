@@ -9,10 +9,10 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.SecretKeyFactory;
 
 
-public class KeyFactory {
+public class IDFactory {
 
     // hashed string of data for naming surveys
-    protected static String makeSurveyKey(String petName, String org, String device_id, String time) {
+    protected static String makeSurveyID(String petName, String org, String device_id, String time) {
 
         try {
             // get survey data
@@ -37,25 +37,8 @@ public class KeyFactory {
         }
     }
 
-
     // File key for user database
-    protected static String makeUserKey(String org, String deviceID, String model) {
+    protected static String makeUserID(String org, String deviceID, String model) {
         return "USER_" + org + "_" + deviceID + "_" + model;
-    }
-
-
-    //TODO
-    // how to do key exchange?
-    public static String hashPassword(String password) {
-        SecretKeyFactory keyFactory = null;
-        try
-        {
-            keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            return password;//keyFactory.generateSecret("");
-        }
-        catch (NoSuchAlgorithmException e) {
-            Log.e("APOP App", "NO SUCH HASHING ALGORITHM");
-            return null;
-        }
     }
 }
