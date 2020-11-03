@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.survey;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,7 +10,7 @@ import java.io.FileWriter;
 
 public class SurveySubmitter {
 
-    protected static void uploadFile(Context context, SurveyJSON surveyJSON) {
+    public static void uploadFile(Context context, SurveyJSON surveyJSON) {
 
         // Make the file from the survey's id
         String surveyKey =  surveyJSON.getID() + ".json";
@@ -33,5 +33,8 @@ public class SurveySubmitter {
                 result -> Log.i("APOPapp", "Successfuly uploaded: " + result.getKey()),
                 storageFailure -> Log.e("APOPapp", "Upload failed", storageFailure)
         );
+
+        //TODO
+        // Delete the file or make it cached
     }
 }

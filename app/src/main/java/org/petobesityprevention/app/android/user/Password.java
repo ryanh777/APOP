@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.user;
 
 import android.util.Log;
 

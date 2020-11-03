@@ -2,6 +2,9 @@ package org.petobesityprevention.app.android;
 
 import org.json.JSONException;
 import org.junit.Test;
+import org.petobesityprevention.app.android.survey.SurveyJSON;
+import org.petobesityprevention.app.android.user.Password;
+import org.petobesityprevention.app.android.user.User;
 
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
@@ -17,7 +20,7 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void userKey_isCorrect() {
-        assertEquals(KeyFactory.makeUserID("ORG", "ID", "ANDROID"), "USER_ORG_ID_ANDROID");
+        assertEquals(User.makeUserID("ORG", "ID", "ANDROID"), "USER_ORG_ID_ANDROID");
     }
     @Test
     public void _isCorrect() {
@@ -26,7 +29,7 @@ public class ExampleUnitTest {
 
     @Test
     public void surveyJSON_isCorrect() {
-        SurveyJSON sJSON = JSONFactory.makeSurveyJSON("", "", "", "",
+        SurveyJSON sJSON = SurveyJSON.makeSurveyJSON("", "", "", "",
                 0, 0, "", "", 0, 0, 0, 0, "", "");
 
         String survey_id = "";
@@ -40,7 +43,7 @@ public class ExampleUnitTest {
 
     @Test
     public void surveyID_isHex() {
-        String id = KeyFactory.makeSurveyID("Fido", "ORG", "ID", LocalDateTime.now().toString());
+        String id = SurveyJSON.makeSurveyID("Fido", "ORG", "ID", LocalDateTime.now().toString());
 
         String pattern = "[0123456789abcdef]{40}";
 
@@ -51,5 +54,10 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void password_isDifferent() { assertNotEquals("password", KeyFactory.hashPassword("password")); }
+    public void credentialsFile_exists() {
+        // TODO
+    }
+
+    @Test
+    public void password_isDifferent() { assertNotEquals("password", Password.hashPassword("password")); }
 }

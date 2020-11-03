@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
+import org.petobesityprevention.app.android.user.Credentials;
+import org.petobesityprevention.app.android.R;
+import org.petobesityprevention.app.android.survey.SurveyJSON;
+import org.petobesityprevention.app.android.survey.SurveySubmitter;
 
 public class SubmissionActivity extends AppCompatActivity {
 
@@ -63,7 +66,7 @@ public class SubmissionActivity extends AppCompatActivity {
                 String deviceID = Credentials.getDeviceID();
 
                 // make JSON
-                SurveyJSON submissionJSON = JSONFactory.makeSurveyJSON(org, deviceID,
+                SurveyJSON submissionJSON = SurveyJSON.makeSurveyJSON(org, deviceID,
                         petName, petType, age, weight, sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
 
                 // upload JSON file

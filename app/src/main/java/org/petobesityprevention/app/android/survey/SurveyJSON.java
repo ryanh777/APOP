@@ -1,16 +1,31 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.survey;
 
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
-public class JSONFactory {
+public class SurveyJSON extends JSONObject {
+
+    // We store the id key of the survey to avoid computing it multiple times
+    private String id;
+
+    private SurveyJSON(String id) {
+        super();
+        this.id  = id;
+    }
+
+    public String getID() {
+        return id;
+    }
 
     // Make survey JSON object to submit to S3
-    protected static SurveyJSON makeSurveyJSON(String org, String deviceID, String petName, String petType,
+    public static SurveyJSON makeSurveyJSON(String org, String deviceID, String petName, String petType,
                                                int age, int weight, String sex, String breed,
                                                int numDogs, int numCats, int ownerWeight, int bcss,
                                                String medical, String comments) {
@@ -19,7 +34,7 @@ public class JSONFactory {
         String time = LocalDateTime.now().toString();
 
         // make the key (aka filename or id) for the survey
-        String id = IDFactory.makeSurveyID(petName, org, deviceID, time);
+        String id = makeSurveyID(petName, org, deviceID, time);
 
         // Construct
         SurveyJSON json = new SurveyJSON(id);
@@ -50,35 +65,29 @@ public class JSONFactory {
         return json;
     }
 
-    // JSON object of user information
-    public static JSONObject makeUserJSON(String org, String device_id, String model) {
-
-        JSONObject json = new JSONObject();
+    // hashed string of data for naming surveys
+    public static String makeSurveyID(String petName, String org, String device_id, String time) {
 
         try {
-            json.put("org", org);
-            json.put("device_id", device_id);
-            json.put("model", model); // can look into https://github.com/jaredrummler/AndroidDeviceNames for friendlier device names
-        } catch (JSONException e) {
-            Log.e("APOPapp", "Credentials JSON creation failed", e);
+            // get survey data
+            String data = petName + org + device_id + time;
+
+            // hash it with sha-1
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            byte[] hashKey = digest.digest(data.getBytes(StandardCharsets.UTF_8));
+
+            // build string
+            StringBuilder result = new StringBuilder();
+
+            for (byte aByte : hashKey) {
+                // make bytes into hex
+                result.append(String.format("%02x", aByte));
+            }
+            return result.toString();
         }
-
-        return json;
-    }
-
-    //TODO
-    // Organization username and password
-    public static JSONObject makeMasterCredentialsJSON(String org, String password) {
-
-        JSONObject json = new JSONObject();
-
-        try {
-            json.put("org", org);
-            json.put("password", Password.hashPassword(password));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        catch (NoSuchAlgorithmException e) {
+            Log.e("APOP App", "NO SUCH HASHING ALGORITHM");
+            return "SURVEY_" + org + "_" + device_id + "_" + petName + "_" + time;
         }
-
-        return json;
     }
 }

@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
+import org.petobesityprevention.app.android.R;
 
 public class ThankYouActivity extends AppCompatActivity {
 

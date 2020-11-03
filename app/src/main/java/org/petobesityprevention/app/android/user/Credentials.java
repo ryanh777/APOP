@@ -1,18 +1,19 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.user;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.amplifyframework.core.Amplify;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Credentials {
 
@@ -43,11 +44,11 @@ public class Credentials {
     protected static void registerDeviceToOrg(Context context) {
 
         // Make file name from user info
-        String userKey = "Users/" + IDFactory.makeUserID(org, deviceID, model) + ".json";
+        String userKey = "Users/" + User.makeUserID(org, deviceID, model) + ".json";
 
         // Make the file and its JSON content
         File userFile = new File(context.getFilesDir(), userKey);
-        JSONObject userJSON = JSONFactory.makeUserJSON(org, deviceID, model);
+        JSONObject userJSON = User.makeUserJSON(org, deviceID, model);
 
         try {
             // Write the file
@@ -67,21 +68,35 @@ public class Credentials {
                 result -> Log.i("APOPapp", "Successfuly uploaded credentials: " + result.getKey()),
                 storageFailure -> Log.e("APOPapp", "Credentials upload failed", storageFailure)
         );
+
+        // Store account token
+        Token.makeCacheToken(context); //todo implement threading to save mem access time
+        Token.makeFileToken(context);
     }
-
-
 
 
     //TODO
     // Compare org Username and Password to login
-    protected static boolean checkCredentials(Context context, String key) {
+    public static boolean checkCredentials(String username, String hashedPassword, Context context) {
+
+        // S3 File will be named this
+        String key = username + ".json";
+
+        AtomicBoolean checked = new AtomicBoolean(false);
 
         Amplify.Storage.downloadFile(
                 key,
                 new File(context.getFilesDir() + "/credentials.json"),
-                result -> Log.i("APOPapp", "Successfully downloaded: " + result.getFile().getName()),
+                result -> {
+                    Log.i("APOPapp", "Successfully downloaded: " + result.getFile().getName());
+
+                    checked.set(true); },
                 error -> Log.e("APOPapp",  "Download Failure", error)
         );
+
+        while (!checked.get()) {
+            // waiting for download
+        }
 
         //TODO
         // need to wait for download
@@ -89,25 +104,33 @@ public class Credentials {
         try {
             FileReader reader = new FileReader(credentials);
             Log.i("APOPapp", "Reading Credentials " + (char)reader.read());
+            //TODO compare with filereader
+            //TODO delete file
         } catch (FileNotFoundException e) {
             Log.e("APOPapp", "Credentials File not found");
         } catch (IOException e) {
             Log.e("APOPapp", "Credentials I/O Error", e);
         }
-        //TODO compare with filereader
+
+
         return true;
     }
 
 
     //TODO
-    // write a token to the filesystem that lasts a desired amount of time
-    protected void makeToken(String name, Context context) {
+    // Organization username and password for login directory
+    public static JSONObject makeMasterCredentialsJSON(String username, String org, String password) {
+
+        JSONObject json = new JSONObject();
 
         try {
-            FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
+            json.put("username", username);
+            json.put("org", org);
+            json.put("password", Password.hashPassword(password));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch (FileNotFoundException f) {
-            Log.e("APOP App", "Could not make token file");
-        }
+
+        return json;
     }
 }

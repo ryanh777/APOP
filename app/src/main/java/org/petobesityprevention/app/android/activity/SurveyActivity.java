@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.petobesityprevention.app.android.R;
+import org.petobesityprevention.app.android.activity.SubmissionActivity;
 
 public class SurveyActivity extends AppCompatActivity {
 
