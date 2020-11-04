@@ -94,9 +94,9 @@ public class Credentials {
                 error -> Log.e("APOPapp",  "Download Failure", error)
         );
 
-        while (!checked.get()) {
+        //while (!checked.get()) {
             // waiting for download
-        }
+        //}
 
         //TODO
         // need to wait for download
