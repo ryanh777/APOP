@@ -14,7 +14,7 @@ public class SurveySubmitter {
 
         // Make the file from the survey's id
         String surveyKey =  surveyJSON.getID() + ".json";
-        File surveyFile = new File(context.getFilesDir(), surveyKey);
+        File surveyFile = new File(context.getFilesDir(), "survey_" + surveyKey);
 
         try {
             // Write the file
@@ -30,11 +30,13 @@ public class SurveySubmitter {
         Amplify.Storage.uploadFile(
                 "Surveys/" + surveyKey,
                 surveyFile,
-                result -> Log.i("APOPapp", "Successfuly uploaded: " + result.getKey()),
-                storageFailure -> Log.e("APOPapp", "Upload failed", storageFailure)
+                result -> {
+                    Log.i("APOPapp", "Successfuly uploaded survey: " + result.getKey());
+                    surveyFile.delete();
+                },
+                storageFailure -> {
+                    Log.e("APOPapp", "Survey upload failed", storageFailure);
+                }
         );
-
-        //TODO
-        // Delete the file or make it cached
     }
 }

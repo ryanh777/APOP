@@ -3,7 +3,7 @@ package org.petobesityprevention.app.android;
 import org.json.JSONException;
 import org.junit.Test;
 import org.petobesityprevention.app.android.survey.SurveyJSON;
-import org.petobesityprevention.app.android.user.Password;
+import org.petobesityprevention.app.android.user.Hash;
 import org.petobesityprevention.app.android.user.User;
 
 import java.time.LocalDateTime;
@@ -59,5 +59,5 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void password_isDifferent() { assertNotEquals("password", Password.hashPassword("password")); }
+    public void password_isDifferent() { assertNotEquals(Hash.hashPassword("password"), "password"); }
 }

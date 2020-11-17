@@ -1,30 +1,48 @@
 package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.petobesityprevention.app.android.files.CallbackActivityDownloader;
+import org.petobesityprevention.app.android.files.FileCleaner;
 import org.petobesityprevention.app.android.user.Credentials;
-import org.petobesityprevention.app.android.user.Password;
 import org.petobesityprevention.app.android.R;
-import org.petobesityprevention.app.android.user.Token;
+import org.petobesityprevention.app.android.files.Token;
 
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static String username = null, password = null;
+    private EditText passwordText;
+    private TextView invalid_tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Start
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity main = this;
+
+        // Clean Files
+        Log.i("APOPappMain", "Cleaning files");
+        new Thread() {
+            @Override
+            public void run() {
+                FileCleaner fileCleaner = new FileCleaner();
+                fileCleaner.cleanAndUploadAllFiles(getApplicationContext());
+            }
+        }.start();
 
         // Check for token
+        Log.i("APOPappMain", "Checking for token");
         if (Token.tokenExistsAndIsValid(getApplicationContext())) // stored account token exists and is valid
         {
             // go straight to survey
@@ -36,37 +54,31 @@ public class MainActivity extends AppCompatActivity {
 
         // Text fields
         EditText usernameText = findViewById(R.id.id_username);
-        EditText passwordText = findViewById(R.id.id_password);
+        passwordText = findViewById(R.id.id_password);
+
+        invalid_tag = findViewById(R.id.id_invalid_tag);
 
         // Login button
         Button loginButton = findViewById(R.id.id_login);
+
+        // When login clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // When login clicked
 
                 // Get login info
-                String username = usernameText.getText().toString(); // should be organization-wide username
-                String password = Password.hashPassword(passwordText.getText().toString());
+                username = usernameText.getText().toString(); // should be organization-wide username
+                password = passwordText.getText().toString();
 
-                // check credentials
-                boolean cred_valid = Credentials.checkCredentials(username, password, getApplicationContext());
-                Log.i("APOPapp", "Credentials: " + cred_valid);
+                // S3 File will be named this
+                String key = "Orgs/" + username + ".json";
 
-                if (cred_valid) {
-                    // Credentials Valid
+                // Download and save the file in cache, it will call back when finished
+                CallbackActivityDownloader downloader = new CallbackActivityDownloader(main);
 
-                    // Generate unique user id (https://developer.android.com/training/articles/user-data-ids)
-                    String uniqueID = UUID.randomUUID().toString();
-
-                    // Set credentials
-                    Credentials.setCredentials(username, uniqueID);
-                    Log.i("APOPapp", "Credentials set (Org, Device_ID): (" + Credentials.getOrg() + ", " + Credentials.getDeviceID() + ")");
-                }
-
-                // Start survey
-                Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
-                startActivity(surveyActivity);
+                Log.i("APOPappMain", "About to call download");
+                downloader.getFile(key, "credentials.tmp", getApplicationContext());
+                Log.i("APOPappMain", "Called download");
             }
         });
 
@@ -82,5 +94,36 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(accountCreationActivity);
             }
         });
+
     }
+
+    // Callback from downloader, means it has finished downloading credentials file
+    public void callback() {
+
+        Log.i("APOPappMain", "Got called back!");
+        // check credentials
+        Boolean cred_valid = Credentials.checkAndSetCredentials(username, password, getApplicationContext());
+        Log.i("APOPappMain", "Credentials: " + cred_valid);
+
+        if (cred_valid == null) {
+            // some error happened, set unknown credentials
+            Credentials.setCredentials(username, "ORG_ERROR::USER_" + username);
+        }
+        else if (cred_valid) {
+            // Login credentials valid
+
+            // Register the device to the organization
+            Credentials.registerDeviceToOrg(getApplicationContext());
+
+            // Start survey
+            Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
+            startActivity(surveyActivity);
+        }
+        else {
+            // Credentials invalid, clear fields and make the tag red
+            invalid_tag.setTextColor(Color.RED);
+            passwordText.setText("");
+        }
+    }
+
 }

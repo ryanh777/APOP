@@ -14,7 +14,18 @@
         android:layout_marginTop="40dp"
         android:layout_marginHorizontal="5dp"/>
 
+    <TextView
+        android:id="@+id/id_invalid_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/id_username_card"
+        android:text="Invalid Login Information"
+        android:textColor="@color/colorBackground"
+        android:layout_marginStart="@dimen/label_text_margin_start"
+        android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/id_username_card"
         android:layout_above="@id/id_password_card"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edittext_height"

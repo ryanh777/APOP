@@ -23,10 +23,8 @@ public class User {
         return json;
     }
 
-
-
     // File key for user database
-    public static String makeUserID(String org, String deviceID, String model) {
-        return "USER_" + org + "_" + deviceID + "_" + model;
+    public static String makeUserID(String deviceID, String model) {
+        return "USER_" + deviceID + "_" + model;
     }
 }
