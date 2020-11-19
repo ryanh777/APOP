@@ -73,6 +73,7 @@
             android:layout_marginStart="@dimen/edittext_margin"
             android:layout_marginEnd="@dimen/edittext_margin">
             <RadioButton
+                android:id="@+id/id_pet_type_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:buttonTint="@color/colorDarkBlue"
@@ -80,6 +81,7 @@
                 style="@style/TextShadow"
                 android:layout_marginEnd="10dp"/>
             <RadioButton
+                android:id="@+id/id_pet_type_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorDarkBlue"
@@ -219,7 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkBlue"
-            android:text="yoooo"
+            android:text="Breed"
             android:textSize="@dimen/label_text_size"
             android:layout_marginStart="@dimen/label_text_margin_start"
             android:layout_marginTop="15dp"

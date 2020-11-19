@@ -3,23 +3,36 @@
     <string name="user_hint">Username</string>
     <string name="pass_hint">Password</string>
     <string name="submit_button">SUBMIT</string>
-    <string-array name="test_dropdown">
+    <string-array name="dropdown_empty">
+        <item>Please select a species</item>
+    </string-array>
+    <string-array name="dropdown_dog">
+        <item>Mixed Breed</item>
+        <item>Mixed Breed Small</item>
+        <item>Mixed Breed Med.</item>
+        <item>Mixed Breed Large</item>
+        <item>Other...</item>
         <item>Lab</item>
+        <item>German Shepherd</item>
         <item>Golden Retriever</item>
-        <item>Yorki</item>
+        <item>Australian Shepherd</item>
         <item>Beagle</item>
-        <item>Lab</item>
-        <item>Golden Retriever</item>
-        <item>Yorki</item>
-        <item>Beagle</item>
-        <item>Lab</item>
-        <item>Golden Retriever</item>
-        <item>Yorki</item>
-        <item>Beagle</item>
-        <item>Lab</item>
-        <item>Golden Retriever</item>
-        <item>Yorki</item>
-        <item>Beagle</item>
+        <item>Boxer</item>
+        <item>Corgi</item>
+        <item>Dachshund</item>
+        <item>English Bulldog</item>
+        <item>French Bulldog</item>
+        <item>German Shorthaired Pointer</item>
+        <item>Husky</item>
+        <item>Poodle</item>
+        <item>Rottweiler</item>
+        <item>Yorkshire Terrier</item>
+    </string-array>
+    <string-array name="dropdown_cat">
+        <item>Domestic Short Hair</item>
+        <item>Domestic Med. Hair</item>
+        <item>Domestic Long Hair</item>
+        <item>Other...</item>
     </string-array>
     <string name="title_activity_account_creation">AccountCreation</string>
     <!--

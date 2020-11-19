@@ -27,9 +27,20 @@ public class SurveyActivity extends AppCompatActivity {
 
         // Breed dropdown
         Spinner spinner = findViewById(R.id.id_breed);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.test_dropdown, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+
+        // Display "please select a species" when species unspecified
+        ArrayAdapter<CharSequence> adapter_empty = ArrayAdapter.createFromResource(this, R.array.dropdown_empty, android.R.layout.simple_spinner_item);
+        adapter_empty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // List of dog breeds
+        ArrayAdapter<CharSequence> adapter_dog = ArrayAdapter.createFromResource(this, R.array.dropdown_dog, android.R.layout.simple_spinner_item);
+        adapter_dog.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // List of cat breeds
+        ArrayAdapter<CharSequence> adapter_cat = ArrayAdapter.createFromResource(this, R.array.dropdown_cat, android.R.layout.simple_spinner_item);
+        adapter_cat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter_empty);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -41,6 +52,27 @@ public class SurveyActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // Do nothing
+            }
+        });
+
+        TextView spinnerText = findViewById(R.id.id_spinner_text);
+        spinnerText.setText("");
+
+        // Species buttons
+        RadioButton dogButton = findViewById(R.id.id_pet_type_dog);
+        RadioButton catButton = findViewById(R.id.id_pet_type_cat);
+
+        // Set dropdown to selected species
+        dogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner.setAdapter(adapter_dog);
+            }
+        });
+        catButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinner.setAdapter(adapter_cat);
             }
         });
 
