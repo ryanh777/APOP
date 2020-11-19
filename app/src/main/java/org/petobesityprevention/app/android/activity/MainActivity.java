@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 CallbackActivityDownloader downloader = new CallbackActivityDownloader(main);
 
                 Log.i("APOPappMain", "About to call download");
-                downloader.getFile(key, "credentials.tmp", getApplicationContext());
+                downloader.getFileForMain(key, "credentials.tmp", getApplicationContext());
                 Log.i("APOPappMain", "Called download");
             }
         });
@@ -125,5 +125,4 @@ public class MainActivity extends AppCompatActivity {
             passwordText.setText("");
         }
     }
-
 }
