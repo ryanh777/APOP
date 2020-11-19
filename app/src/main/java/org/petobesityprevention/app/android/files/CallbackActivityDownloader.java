@@ -7,6 +7,7 @@ import android.util.Log;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.storage.options.StorageDownloadFileOptions;
 
+import org.petobesityprevention.app.android.activity.AccountCreationActivity;
 import org.petobesityprevention.app.android.activity.MainActivity;
 
 import java.io.File;
@@ -14,10 +15,16 @@ import java.io.File;
 
 public class CallbackActivityDownloader {
 
-    private final MainActivity activity;
+    private final MainActivity main;
+    private final AccountCreationActivity creation;
 
-    public CallbackActivityDownloader(MainActivity main) {
-        this.activity = main;
+    public CallbackActivityDownloader(MainActivity activity) {
+        this.main = activity;
+        this.creation = null;
+    }
+    public CallbackActivityDownloader(AccountCreationActivity activity) {
+        this.main = null;
+        this.creation = activity;
     }
 
     /*
@@ -29,18 +36,33 @@ public class CallbackActivityDownloader {
     * This approach mitigates that by making the main thread will be idle once the call is made, and we callback execution once the result is ready
     * */
 
-    public void getFile(String key, String outputName, Context context) {
+    public void getFileForMain(String key, String outputName, Context context) {
         Amplify.Storage.downloadFile(key,
                 new File(context.getFilesDir() + "/" + outputName),
                 StorageDownloadFileOptions.defaultInstance(),
                 progress -> Log.i("APOPApp", "Fraction completed: " + progress.getFractionCompleted()),
                 result -> { // Success
                     Log.i("APOPApp", "Download success");
-                    activity.callback();
+                    main.callback();
                 },
                 error -> { // Error
                     Log.e("APOPapp", "Download failed");
-                    activity.callback();
+                    main.callback();
+                });
+    }
+
+    public void getFileForCreation(String key, String outputName, Context context) {
+        Amplify.Storage.downloadFile(key,
+                new File(context.getFilesDir() + "/" + outputName),
+                StorageDownloadFileOptions.defaultInstance(),
+                progress -> Log.i("APOPApp", "Fraction completed: " + progress.getFractionCompleted()),
+                result -> { // Success
+                    Log.i("APOPApp", "Download success");
+                    creation.callback();
+                },
+                error -> { // Error
+                    Log.e("APOPapp", "Download failed");
+                    creation.callback();
                 });
     }
 }
