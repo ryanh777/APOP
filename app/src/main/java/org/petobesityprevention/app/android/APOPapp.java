@@ -18,9 +18,9 @@ public class APOPapp extends android.app.Application {
 
         // Initialize amplify for aws
         try {
+            Amplify.configure(getApplicationContext());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
-            Amplify.configure(getApplicationContext());
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException ae) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", ae);

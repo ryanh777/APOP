@@ -16,11 +16,11 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".ImageCaptureActivity"
             android:configChanges="keyboard|orientation|screenSize"/>
-        <activity android:name=".AccountCreationActivity" />
-        <activity android:name=".SubmissionActivity" />
-        <activity android:name=".SurveyActivity" />
-        <activity android:name=".ThankYouActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.AccountCreationActivity" />
+        <activity android:name=".activity.SubmissionActivity" />
+        <activity android:name=".activity.SurveyActivity"/>
+        <activity android:name=".activity.ThankYouActivity"/>
+        <activity android:name=".activity.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

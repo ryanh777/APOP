@@ -250,12 +250,56 @@
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
             android:paddingStart="@dimen/edittext_margin"
-            android:paddingEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            android:paddingEnd="@dimen/edittext_margin"/>
+
+        <LinearLayout
+            android:id="@+id/dogs_numbers"
+            android:layout_below="@id/id_num_dogs"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_margin">
+            <TextView
+                android:text="1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="4"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="5"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="6"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/id_label_num_cats"
-            android:layout_below="@id/id_num_dogs"
+            android:layout_below="@id/dogs_numbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cats in Household"
@@ -274,12 +318,56 @@
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
             android:paddingStart="@dimen/edittext_margin"
-            android:paddingEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            android:paddingEnd="@dimen/edittext_margin"/>
+
+        <LinearLayout
+            android:id="@+id/cats_numbers"
+            android:layout_below="@id/id_num_cats"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_margin">
+            <TextView
+                android:text="1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="4"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="5"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="6"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/id_label_owner_weight"
-            android:layout_below="@id/id_num_cats"
+            android:layout_below="@id/cats_numbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Owner Weight Assessment"
@@ -294,17 +382,59 @@
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="4"
-            android:progress="2"
+            android:progress="1"
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
             android:paddingStart="@dimen/edittext_margin"
-            android:paddingEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            android:paddingEnd="@dimen/edittext_margin"/>
+
+        <LinearLayout
+            android:id="@+id/weight_numbers"
+            android:layout_below="@id/id_owner_weight"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_margin">
+            <TextView
+                android:text="1"
+                android:layout_weight="1"
+                android:layout_marginEnd="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="2"
+                android:layout_weight="1"
+                android:layout_marginEnd="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="4"
+                android:layout_weight="1"
+                android:layout_marginStart="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="5"
+                android:layout_weight="1"
+                android:layout_marginStart="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/id_label_bcss"
-            android:layout_below="@id/id_owner_weight"
+            android:layout_below="@id/weight_numbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Body Condition Score"
@@ -324,12 +454,75 @@
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
             android:paddingStart="@dimen/edittext_margin"
-            android:paddingEnd="@dimen/edittext_margin"
-            android:layout_marginBottom="@dimen/gap_margin"/>
+            android:paddingEnd="@dimen/edittext_margin"/>
+
+        <LinearLayout
+            android:id="@+id/bcss_numbers"
+            android:layout_below="@id/id_bcss"
+            android:orientation="horizontal"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/gap_margin">
+            <TextView
+                android:text="1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="4"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="5"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="6"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="7"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="8"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:text="9"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/id_label_medical"
-            android:layout_below="@id/id_bcss"
+            android:layout_below="@id/bcss_numbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Previous Medical Conditions"
