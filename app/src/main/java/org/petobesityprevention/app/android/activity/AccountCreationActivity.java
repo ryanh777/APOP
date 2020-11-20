@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,7 @@ import java.io.File;
 
 public class AccountCreationActivity extends AppCompatActivity {
 
-    private String password, username, org, address, phone, email;
+    private String username, password, password2, org, address, phone, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,11 @@ public class AccountCreationActivity extends AppCompatActivity {
 
         if(usernameCheckFile.exists()) {
             // Username taken
+            Toast.makeText(AccountCreationActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
+        }
+        else if (!password.equals(password2)) {
+            //Password check confirmation failed
+            Toast.makeText(AccountCreationActivity.this, "Password and Confirm Password fields must match.", Toast.LENGTH_SHORT).show();
         }
         else {
             // Hash the credentials to store the
