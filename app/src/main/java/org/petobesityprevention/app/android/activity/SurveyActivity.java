@@ -200,7 +200,7 @@ public class SurveyActivity extends AppCompatActivity {
                     validFields = false;
                 }
                 if (sex == null) {
-                    // TODO make highlighted
+                    // TODO make highlighted or something
                     validFields = false;
                 }
                 if (weight.getText().toString().equals("") || weightNum < 1 || weightNum > 350) {
