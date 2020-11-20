@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,22 +22,24 @@
 
         <TextView
             android:id="@+id/accountCreateTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create new Account:"
+            android:text="Create new Account"
+            android:textColor="@color/colorWhite"
             android:textAlignment="center"
-            android:textSize="35sp"
+            android:textSize="40sp"
+            style="@style/TextShadow"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginBottom="20dp" />
 
         <TextView
             android:id="@+id/id_usernameLbl"
+            style="@style/TextLabelShadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/accountCreateTitle"
-            android:text="Username: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Username"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_username_card"
@@ -61,10 +67,11 @@
         <TextView
             android:id="@+id/id_pwLbl"
             android:layout_below="@id/id_username_card"
+            style="@style/TextLabelShadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Password"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_pw_card"
@@ -91,11 +98,12 @@
 
         <TextView
             android:id="@+id/id_pw2Lbl"
+            style="@style/TextLabelShadow"
             android:layout_below="@id/id_pw_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm Password: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Confirm Password"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_pw2_card"
@@ -122,11 +130,12 @@
 
         <TextView
             android:id="@+id/id_clinicNameLbl"
+            style="@style/TextLabelShadow"
             android:layout_below="@id/id_pw2_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clinic Name: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Clinic Name"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_clinicName_card"
@@ -153,11 +162,12 @@
 
         <TextView
             android:id="@+id/id_addressLbl"
+            style="@style/TextLabelShadow"
             android:layout_below="@id/id_clinicName_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Address: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Address"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_address_card"
@@ -184,11 +194,12 @@
 
         <TextView
             android:id="@+id/id_clinicPhoneLbl"
+            style="@style/TextLabelShadow"
             android:layout_below="@id/id_address_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clinic Telephone: "
-            android:layout_marginLeft="5dp"/>
+            android:text="Clinic Telephone"
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_clinicPhone_card"
@@ -215,11 +226,12 @@
 
         <TextView
             android:id="@+id/id_clinicEmailLbl"
+            style="@style/TextLabelShadow"
             android:layout_below="@id/id_clinicPhone_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clinic Email Address: "
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginStart="@dimen/label_text_margin_start"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_clinicEmail_card"
@@ -264,3 +276,27 @@
 
     </RelativeLayout>
 </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/id_loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="#000000" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

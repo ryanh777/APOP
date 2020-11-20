@@ -1,6 +1,7 @@
 package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,15 +21,18 @@ import java.io.File;
 public class AccountCreationActivity extends AppCompatActivity {
 
     private String username, password, password2, org, address, phone, email;
+    private View loadingSplash;
+    private EditText usernameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
 
+        loadingSplash = findViewById(R.id.id_loadingPanel);
         AccountCreationActivity activity = this;
 
-        EditText usernameText = findViewById(R.id.id_username);
+        usernameText = findViewById(R.id.id_username);
         EditText pwText = findViewById(R.id.id_pw);
         EditText pw2Text = findViewById(R.id.id_pw2);
         EditText clinicText = findViewById(R.id.id_clinicName);
@@ -41,7 +45,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = usernameText.getText().toString();
+                username = usernameText.getText().toString().toLowerCase();
                 password = pwText.getText().toString();
                 password2 = pw2Text.getText().toString();
                 org = clinicText.getText().toString();
@@ -49,29 +53,47 @@ public class AccountCreationActivity extends AppCompatActivity {
                 phone = phoneText.getText().toString();
                 email = emailText.getText().toString();
 
+                if (username.equals("")) {
+                    usernameText.setHint("Username Required");
+                    usernameText.setHintTextColor(Color.RED);
+                }
+                if (password.equals("")) {
+                    pwText.setHint("Password Required");
+                    pwText.setHintTextColor(Color.RED);
+                }
                 if (!password.equals(password2)) {
                     //Password check confirmation failed
-                    Toast.makeText(AccountCreationActivity.this, "Password and Confirm Password fields must match.", Toast.LENGTH_SHORT).show();
+                    pw2Text.setText("");
+                    pw2Text.setHint("Passwords Must Match");
+                    pw2Text.setHintTextColor(Color.RED);
                 } else {
                     // Download to check if username taken already
                     CallbackActivityDownloader downloader = new CallbackActivityDownloader(activity);
                     downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+
+                    // Popup splash
+                    loadingSplash.setVisibility(View.VISIBLE);
                 }
             }
         });
-
     }
 
     // Username file
     public void callback(boolean result) {
+
+        loadingSplash.setVisibility(View.INVISIBLE);
         Log.i("APOPappCreation", "Got called back!");
 
         File usernameCheckFile = new File(getApplicationContext().getFilesDir()+ "/username.tmp");
 
         if(usernameCheckFile.exists() || !result) {
             // Username taken
-            Toast.makeText(AccountCreationActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
-            Log.e("APOPApp", "Username already exists");
+            Log.e("APOPApp", "Username taken: " + username);
+
+            usernameText.setText("");
+            usernameText.setHint("Username Taken");
+            usernameText.setHintTextColor(Color.RED);
+
             usernameCheckFile.delete();
         }
         else {

@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Get login info
-                username = usernameText.getText().toString(); // should be organization-wide username
+                username = usernameText.getText().toString().toLowerCase(); // should be organization-wide username
                 password = passwordText.getText().toString();
 
                 // S3 File will be named this

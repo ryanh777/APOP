@@ -178,6 +178,8 @@ public class SurveyActivity extends AppCompatActivity {
                 breed_label.setTextColor(getResources().getColor(R.color.colorWhite));
                 TextView name_label = findViewById(R.id.id_label_pet_name);
                 name_label.setTextColor(getResources().getColor(R.color.colorWhite));
+                TextView sex_label = findViewById(R.id.id_sex_invalid);
+                name_label.setVisibility(View.INVISIBLE);
 
                 // Check age and weight are numbers
                 double ageNum = 0.0;
@@ -191,7 +193,7 @@ public class SurveyActivity extends AppCompatActivity {
                 }
 
                 // Check fields exist and are valid
-                if (petName.getText().toString().equals("")) {
+                if (petName.getText().toString().trim().equals("")) {
                     name_label.setTextColor(Color.RED);
                     validFields = false;
                 }
@@ -200,7 +202,7 @@ public class SurveyActivity extends AppCompatActivity {
                     validFields = false;
                 }
                 if (sex == null) {
-                    // TODO make highlighted or something
+                    sex_label.setVisibility(View.VISIBLE);
                     validFields = false;
                 }
                 if (weight.getText().toString().equals("") || weightNum < 1 || weightNum > 350) {
