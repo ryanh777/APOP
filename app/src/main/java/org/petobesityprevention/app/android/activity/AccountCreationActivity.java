@@ -49,29 +49,34 @@ public class AccountCreationActivity extends AppCompatActivity {
                 phone = phoneText.getText().toString();
                 email = emailText.getText().toString();
 
-                // Download to check if username taken already
-                CallbackActivityDownloader downloader = new CallbackActivityDownloader(activity);
-                downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+                if (!password.equals(password2)) {
+                    //Password check confirmation failed
+                    Toast.makeText(AccountCreationActivity.this, "Password and Confirm Password fields must match.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Download to check if username taken already
+                    CallbackActivityDownloader downloader = new CallbackActivityDownloader(activity);
+                    downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+                }
             }
         });
 
     }
 
     // Username file
-    public void callback() {
+    public void callback(boolean result) {
         Log.i("APOPappCreation", "Got called back!");
 
-        File usernameCheckFile = new File(getApplicationContext().getFilesDir(), "username.tmp");
+        File usernameCheckFile = new File(getApplicationContext().getFilesDir()+ "/username.tmp");
 
-        if(usernameCheckFile.exists()) {
+        if(usernameCheckFile.exists() || !result) {
             // Username taken
             Toast.makeText(AccountCreationActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
-        }
-        else if (!password.equals(password2)) {
-            //Password check confirmation failed
-            Toast.makeText(AccountCreationActivity.this, "Password and Confirm Password fields must match.", Toast.LENGTH_SHORT).show();
+            Log.e("APOPApp", "Username already exists");
+            usernameCheckFile.delete();
         }
         else {
+            Log.i("APOPApp", "Creating Account");
+
             // Hash the credentials to store the
             String hashedPassword = Hash.hashPassword(password);
 
