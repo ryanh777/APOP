@@ -2,8 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SurveyActivity"
     android:background="@color/colorBackground">
@@ -367,8 +367,124 @@
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/id_submit_card"
+            android:id="@+id/id_image_card"
             android:layout_below="@id/id_comments"
+            android:layout_width="150dp"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorLimeGreen">
+            <Button
+                android:id="@+id/id_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:text="Take Images"/>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/id_imageviews"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_below="@id/id_image_card"
+            android:layout_marginBottom="2dp">
+            <ImageView
+                android:id="@+id/id_imageview_1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"/>
+            <ImageView
+                android:id="@+id/id_imageview_2"
+                android:layout_marginHorizontal="-10dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"/>
+            <ImageView
+                android:id="@+id/id_imageview_3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_image_buttons"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_imageviews"
+            android:paddingBottom="@dimen/gap_margin">
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardBackgroundColor="@color/colorLimeGreen"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/imageButton1"
+                        android:text="Side"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@null"/>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="-10dp"
+                android:layout_gravity="center">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardBackgroundColor="@color/colorLimeGreen"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/imageButton2"
+                        android:text="Front"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@null"/>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardBackgroundColor="@color/colorLimeGreen"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/imageButton3"
+                        android:text="Top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@null"/>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_submit_card"
+            android:layout_below="@id/id_image_buttons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             app:cardElevation="7dp"
