@@ -19,7 +19,9 @@
         <activity android:name=".AccountCreationActivity" />
         <activity android:name=".SubmissionActivity" />
         <activity android:name=".SurveyActivity" />
+        <activity android:name=".ThankYouActivity"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

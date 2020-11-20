@@ -1,15 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountCreationActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.AccountCreationActivity"
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="account creation screen"
-        android:textSize="30sp"/>
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/accountCreateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create new Account:"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/id_usernameLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/accountCreateTitle"
+            android:text="Username: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_username_card"
+            android:layout_below="@id/id_usernameLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_pwLbl"
+            android:layout_below="@id/id_username_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_pw_card"
+            android:layout_below="@id/id_pwLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_pw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_pw2Lbl"
+            android:layout_below="@id/id_pw_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_pw2_card"
+            android:layout_below="@id/id_pw2Lbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_pw2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_clinicNameLbl"
+            android:layout_below="@id/id_pw2_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clinic Name: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_clinicName_card"
+            android:layout_below="@id/id_clinicNameLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_clinicName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_addressLbl"
+            android:layout_below="@id/id_clinicName_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_address_card"
+            android:layout_below="@id/id_addressLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_clinicPhoneLbl"
+            android:layout_below="@id/id_address_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clinic Telephone: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_clinicPhone_card"
+            android:layout_below="@id/id_clinicPhoneLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_clinicPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="phone"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/id_clinicEmailLbl"
+            android:layout_below="@id/id_clinicPhone_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clinic Email Address: "
+            android:layout_marginLeft="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_clinicEmail_card"
+            android:layout_below="@id/id_clinicEmailLbl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorWhite">
+            <EditText
+                android:id="@+id/id_clinicEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="#c7c7c7"
+                android:textColor="@color/colorDarkBlue"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/id_submit_card"
+            android:layout_below="@id/id_clinicEmail_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            app:cardElevation="7dp"
+            android:layout_marginHorizontal="@dimen/edittext_margin"
+            android:layout_marginBottom="@dimen/gap_margin"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/colorDarkBlue">
+            <Button
+                android:id="@+id/id_create"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:text="CREATE ACCOUNT"/>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</ScrollView>
