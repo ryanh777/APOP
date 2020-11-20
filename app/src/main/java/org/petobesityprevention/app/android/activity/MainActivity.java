@@ -1,7 +1,6 @@
 package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static String username = null, password = null;
     private EditText passwordText;
     private TextView invalid_tag;
+    private View loadingSplash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MainActivity main = this;
+        loadingSplash = findViewById(R.id.id_loadingPanel);
 
         // Clean Files
         Log.i("APOPappMain", "Cleaning files");
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("APOPappMain", "About to call download");
                 downloader.getFileForMain(key, "credentials.tmp", getApplicationContext());
                 Log.i("APOPappMain", "Called download");
+
+                // Popup splash
+                loadingSplash.setVisibility(View.VISIBLE);
             }
         });
 
@@ -99,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Callback from downloader, means it has finished downloading credentials file
     public void callback() {
+
+        loadingSplash.setVisibility(View.INVISIBLE);
 
         Log.i("APOPappMain", "Got called back!");
         // check credentials
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             // Credentials invalid, clear fields and make the tag red
-            invalid_tag.setTextColor(Color.RED);
+            invalid_tag.setVisibility(View.VISIBLE);
             passwordText.setText("");
         }
     }

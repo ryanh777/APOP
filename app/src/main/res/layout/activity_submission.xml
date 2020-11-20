@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="CONFIRM DATA"
         android:textSize="30sp"
+        android:textColor="@color/colorWhite"
         android:gravity="center"
         android:layout_marginVertical="10dp"/>
 
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/edittext_margin"
             android:textSize="25sp"
+            android:textColor="@color/colorWhite"
             android:text="example text"/>
     </ScrollView>
 

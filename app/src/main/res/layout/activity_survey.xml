@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
+    android:id="@+id/id_scrollView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -293,6 +294,7 @@
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="4"
+            android:progress="2"
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
@@ -317,6 +319,7 @@
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="8"
+            android:progress="4"
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"

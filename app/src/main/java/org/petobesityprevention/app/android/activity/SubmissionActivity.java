@@ -28,8 +28,8 @@ public class SubmissionActivity extends AppCompatActivity {
         // Get values from previous state
         String petName = getIntent().getExtras().getString("PET_NAME");
         String petType = getIntent().getExtras().getString("PET_TYPE");
-        int age = getIntent().getExtras().getInt("AGE");
-        int weight = getIntent().getExtras().getInt("WEIGHT");
+        double age = getIntent().getExtras().getDouble("AGE");
+        double weight = getIntent().getExtras().getDouble("WEIGHT");
         String sex = getIntent().getExtras().getString("SEX");
         String breed = getIntent().getExtras().getString("BREED");
         int numDogs = getIntent().getExtras().getInt("NUM_DOGS");
@@ -42,15 +42,15 @@ public class SubmissionActivity extends AppCompatActivity {
         // Set the data confirmation text
         TextView tv = findViewById(R.id.id_test_data_pass);
         tv.setText("Pet Name: " + petName + '\n'
-                + "Pet Type: " + petType + '\n'
+                + "Species: " + petType + '\n'
                 + "Age: " + age + '\n'
                 + "Weight: " + weight + '\n'
                 + "Sex: " + sex + '\n'
                 + "Breed: " + breed + '\n'
-                + "Number of Dogs in Household: " + numDogs + '\n'
-                + "Number of Cats in Household: " + numCats + '\n'
+                + "Dogs in Household: " + numDogs + '\n'
+                + "Cats in Household: " + numCats + '\n'
                 + "Owner Weight Assessment: " + ownerWeight + '\n'
-                + "Body Condition Scoring System: " + bcss + '\n'
+                + "Body Condition Score: " + bcss + '\n'
                 + "Previous Medical Conditions: " + medical + '\n'
                 + "Comments: " + comments + '\n');
 
@@ -67,7 +67,7 @@ public class SubmissionActivity extends AppCompatActivity {
 
                 // make JSON
                 SurveyJSON submissionJSON = SurveyJSON.makeSurveyJSON(org, deviceID,
-                        petName, petType, age, weight, sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
+                        petName, petType, (int) (age + 0.5), (int) (weight + 0.5), sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
 
                 // upload JSON file
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);

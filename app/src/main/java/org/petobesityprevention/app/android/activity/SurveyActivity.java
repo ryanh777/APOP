@@ -1,6 +1,7 @@
 package org.petobesityprevention.app.android.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -100,27 +102,75 @@ public class SurveyActivity extends AppCompatActivity {
                 EditText medical = findViewById(R.id.id_medical);
                 EditText comments = findViewById(R.id.id_comments);
 
-                // Set the field values to pass to the submission activity
-                Intent submissionActivity = new Intent(getApplicationContext(), SubmissionActivity.class);
-                submissionActivity.putExtra("PET_NAME", petName.getText().toString());
-                if (petType != null) {
-                    submissionActivity.putExtra("PET_TYPE", petType.getText().toString());
-                }
-                submissionActivity.putExtra("BREED", breed.getSelectedItem().toString());
-                submissionActivity.putExtra("AGE", Integer.parseInt(age.getText().toString()));
-                if (sex != null) {
-                    submissionActivity.putExtra("SEX", sex.getText().toString());
-                }
-                submissionActivity.putExtra("NUM_DOGS", numDogs.getProgress());
-                submissionActivity.putExtra("NUM_CATS", numCats.getProgress());
-                submissionActivity.putExtra("OWNER_WEIGHT", Integer.parseInt(String.valueOf(ownerWeight.getProgress() + 1)));
-                submissionActivity.putExtra("BCSS", Integer.parseInt(String.valueOf(bcss.getProgress() + 1)));
-                submissionActivity.putExtra("WEIGHT", Integer.parseInt(weight.getText().toString()));
-                submissionActivity.putExtra("MEDICAL", medical.getText().toString());
-                submissionActivity.putExtra("COMMENTS", comments.getText().toString());
+                // Reset labels if previously invalid
+                boolean validFields = true;
+                TextView weight_label = findViewById(R.id.id_label_weight);
+                weight_label.setTextColor(getResources().getColor(R.color.colorWhite));
+                TextView age_label = findViewById(R.id.id_label_age);
+                age_label.setTextColor(getResources().getColor(R.color.colorWhite));
+                TextView breed_label = findViewById(R.id.id_label_breed);
+                breed_label.setTextColor(getResources().getColor(R.color.colorWhite));
+                TextView name_label = findViewById(R.id.id_label_pet_name);
+                name_label.setTextColor(getResources().getColor(R.color.colorWhite));
 
-                // Goto Submission Activity
-                startActivity(submissionActivity);
+                // Check age and weight are numbers
+                double ageNum = 0.0;
+                double weightNum = 0.0;
+                try {
+                    ageNum = Double.parseDouble(age.getText().toString());
+                    weightNum = Double.parseDouble(weight.getText().toString());
+                } catch (NumberFormatException n) {
+                    // Invalid weight or age entry
+                    validFields = false;
+                }
+
+                // Check fields exist and are valid
+                if (petName.getText().toString().equals("")) {
+                    name_label.setTextColor(Color.RED);
+                    validFields = false;
+                }
+                if (petType == null) {
+                    breed_label.setTextColor(Color.RED);
+                    validFields = false;
+                }
+                if (sex == null) {
+                    // TODO make highlighted
+                    validFields = false;
+                }
+                if (weight.getText().toString().equals("") || weightNum < 1 || weightNum > 350) {
+                    weight_label.setTextColor(Color.RED);
+                    validFields = false;
+                }
+                if (age.getText().toString().equals("") || ageNum < 1 || ageNum > 35) {
+                    age_label.setTextColor(Color.RED);
+                    validFields = false;
+                }
+
+
+                if (validFields) {
+                    // Set the field values to pass to the submission activity
+                    Intent submissionActivity = new Intent(getApplicationContext(), SubmissionActivity.class);
+                    submissionActivity.putExtra("PET_NAME", petName.getText().toString());
+                    submissionActivity.putExtra("PET_TYPE", petType.getText().toString());
+                    submissionActivity.putExtra("BREED", breed.getSelectedItem().toString());
+                    submissionActivity.putExtra("AGE", Double.parseDouble(age.getText().toString()));
+                    submissionActivity.putExtra("WEIGHT", Double.parseDouble(weight.getText().toString()));
+                    submissionActivity.putExtra("SEX", sex.getText().toString());
+                    submissionActivity.putExtra("NUM_DOGS", numDogs.getProgress());
+                    submissionActivity.putExtra("NUM_CATS", numCats.getProgress());
+                    submissionActivity.putExtra("OWNER_WEIGHT", Integer.parseInt(String.valueOf(ownerWeight.getProgress() + 1)));
+                    submissionActivity.putExtra("BCSS", Integer.parseInt(String.valueOf(bcss.getProgress() + 1)));
+                    submissionActivity.putExtra("MEDICAL", medical.getText().toString());
+                    submissionActivity.putExtra("COMMENTS", comments.getText().toString());
+
+                    // Goto Submission Activity
+                    startActivity(submissionActivity);
+                }
+
+                // Else
+                // Scroll to top of page
+                ScrollView scroll = findViewById(R.id.id_scrollView);
+                scroll.fullScroll(ScrollView.FOCUS_UP);
             }
         });
     }

@@ -1,16 +1,12 @@
 package org.petobesityprevention.app.android.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.app.AlertDialog;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,9 +26,7 @@ public class AccountCreationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
 
-        // Download to check if username taken already
-        CallbackActivityDownloader downloader = new CallbackActivityDownloader(this);
-        downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+        AccountCreationActivity activity = this;
 
         EditText usernameText = findViewById(R.id.id_username);
         EditText pwText = findViewById(R.id.id_pw);
@@ -55,7 +49,9 @@ public class AccountCreationActivity extends AppCompatActivity {
                 phone = phoneText.getText().toString();
                 email = emailText.getText().toString();
 
-                callback();
+                // Download to check if username taken already
+                CallbackActivityDownloader downloader = new CallbackActivityDownloader(activity);
+                downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
             }
         });
 
