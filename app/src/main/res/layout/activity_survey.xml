@@ -160,9 +160,22 @@
                 android:textColor="@color/colorDarkBlue"/>
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/id_sex_invalid"
+            android:layout_below="@id/id_weight_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Sex"
+            android:textColor="@color/colorRed"
+            android:layout_marginStart="@dimen/label_text_margin_start"
+            android:textSize="25dp"
+            android:visibility="invisible"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="@dimen/label_text_margin_bottom"/>
+
         <RadioGroup
             android:id="@+id/id_sex_group"
-            android:layout_below="@id/id_weight_card"
+            android:layout_below="@id/id_sex_invalid"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

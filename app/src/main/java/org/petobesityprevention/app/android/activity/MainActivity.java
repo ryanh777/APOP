@@ -20,6 +20,7 @@ import org.petobesityprevention.app.android.files.Token;
 public class MainActivity extends AppCompatActivity {
 
     private static String username = null, password = null;
+    private EditText usernameText;
     private EditText passwordText;
     private TextView invalid_tag;
     private View loadingSplash;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Text fields
-        EditText usernameText = findViewById(R.id.id_username);
+        usernameText = findViewById(R.id.id_username);
         passwordText = findViewById(R.id.id_password);
 
         invalid_tag = findViewById(R.id.id_invalid_tag);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Get login info
-                username = usernameText.getText().toString(); // should be organization-wide username
+                username = usernameText.getText().toString().toLowerCase(); // should be organization-wide username
                 password = passwordText.getText().toString();
 
                 // S3 File will be named this
@@ -102,32 +103,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Callback from downloader, means it has finished downloading credentials file
-    public void callback() {
+    public void callback(boolean result) {
 
         loadingSplash.setVisibility(View.INVISIBLE);
 
         Log.i("APOPappMain", "Got called back!");
-        // check credentials
-        Boolean cred_valid = Credentials.checkAndSetCredentials(username, password, getApplicationContext());
-        Log.i("APOPappMain", "Credentials: " + cred_valid);
 
-        if (cred_valid == null) {
-            // some error happened, set unknown credentials
-            Credentials.setCredentials(username, "ORG_ERROR::USER_" + username);
-        }
-        else if (cred_valid) {
-            // Login credentials valid
+        if (result) {
+            // check credentials
+            Boolean cred_valid = Credentials.checkAndSetCredentials(username, password, getApplicationContext());
+            Log.i("APOPappMain", "Credentials: " + cred_valid);
 
-            // Register the device to the organization
-            Credentials.registerDeviceToOrg(getApplicationContext());
+            if (cred_valid == null) {
+                // some error happened, set unknown credentials
+                Credentials.setCredentials(username, "ORG_ERROR::USER_" + username);
+            } else if (cred_valid) {
+                // Login credentials valid
 
-            // Start survey
-            Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
-            startActivity(surveyActivity);
+                // Register the device to the organization
+                Credentials.registerDeviceToOrg(getApplicationContext());
+
+                // Start survey
+                Intent surveyActivity = new Intent(getApplicationContext(), SurveyActivity.class);
+                startActivity(surveyActivity);
+            } else {
+                // Credentials invalid, clear fields and make the tag red
+                invalid_tag.setVisibility(View.VISIBLE);
+                passwordText.setText("");
+            }
         }
         else {
-            // Credentials invalid, clear fields and make the tag red
             invalid_tag.setVisibility(View.VISIBLE);
+            usernameText.setText("");
             passwordText.setText("");
         }
     }

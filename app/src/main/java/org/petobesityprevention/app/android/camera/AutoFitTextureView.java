@@ -1,4 +1,4 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.camera;
 
 import android.content.Context;
 import android.util.AttributeSet;

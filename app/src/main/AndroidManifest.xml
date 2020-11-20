@@ -14,10 +14,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".ImageCaptureActivity"
+        <activity android:name=".activity.ImageCaptureActivity"
             android:configChanges="keyboard|orientation|screenSize"/>
-        <activity android:name=".activity.AccountCreationActivity" />
-        <activity android:name=".activity.SubmissionActivity" />
+        <activity android:name=".activity.AccountCreationActivity"/>
+        <activity android:name=".activity.SubmissionActivity"/>
         <activity android:name=".activity.SurveyActivity"/>
         <activity android:name=".activity.ThankYouActivity"/>
         <activity android:name=".activity.MainActivity">

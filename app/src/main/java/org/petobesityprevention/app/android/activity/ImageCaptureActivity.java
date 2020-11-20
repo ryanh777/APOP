@@ -1,8 +1,11 @@
-package org.petobesityprevention.app.android;
+package org.petobesityprevention.app.android.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.petobesityprevention.app.android.R;
+import org.petobesityprevention.app.android.camera.Camera2Fragment;
 
 public class ImageCaptureActivity extends AppCompatActivity {
 
