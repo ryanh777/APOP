@@ -26,6 +26,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'org.hamcrest:hamcrest-junit:2.0.0.0'
+        }
+    }
+
+    configurations { compile.exclude group: "junit", module: "junit" }
 }
 
 dependencies {
@@ -36,7 +44,7 @@ dependencies {
     implementation 'androidx.wear:wear:1.1.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.1'
     implementation 'androidx.navigation:navigation-ui:2.3.1'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -49,4 +57,5 @@ dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     // need 1.1 NOT 1.1.1
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }

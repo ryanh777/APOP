@@ -6,6 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.app.AlertDialog;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +33,32 @@ public class AccountCreationActivity extends AppCompatActivity {
         // Download to check if username taken already
         CallbackActivityDownloader downloader = new CallbackActivityDownloader(this);
         downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+
+        EditText usernameText = findViewById(R.id.id_username);
+        EditText pwText = findViewById(R.id.id_pw);
+        EditText pw2Text = findViewById(R.id.id_pw2);
+        EditText clinicText = findViewById(R.id.id_clinicName);
+        EditText addressText = findViewById(R.id.id_address);
+        EditText phoneText = findViewById(R.id.id_clinicPhone);
+        EditText emailText = findViewById(R.id.id_clinicEmail);
+
+        Button createButton = findViewById(R.id.id_create);
+
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                username = usernameText.getText().toString();
+                password = pwText.getText().toString();
+                password2 = pw2Text.getText().toString();
+                org = clinicText.getText().toString();
+                address = addressText.getText().toString();
+                phone = phoneText.getText().toString();
+                email = emailText.getText().toString();
+
+                callback();
+            }
+        });
+
     }
 
     // Username file
@@ -58,4 +89,6 @@ public class AccountCreationActivity extends AppCompatActivity {
             startActivity(surveyActivity);
         }
     }
+
+
 }
