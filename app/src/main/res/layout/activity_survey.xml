@@ -26,6 +26,7 @@
             android:textSize="40sp"
             style="@style/TextShadow"
             android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginBottom="@dimen/gap_margin"/>
 
         <TextView
@@ -273,6 +274,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_margin">
             <TextView
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
                 android:text="1"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -297,13 +304,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:text="5"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-            <TextView
-                android:text="6"
+                android:text="5+"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -341,6 +342,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_margin">
             <TextView
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
                 android:text="1"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -365,13 +372,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:text="5"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-            <TextView
-                android:text="6"
+                android:text="5+"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -395,7 +396,7 @@
             android:layout_height="50dp"
             android:minHeight="10dp"
             android:max="4"
-            android:progress="1"
+            android:progress="2"
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
@@ -473,7 +474,7 @@
             android:id="@+id/bcss_numbers"
             android:layout_below="@id/id_bcss"
             android:orientation="horizontal"
-            android:layout_width="337dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/gap_margin">

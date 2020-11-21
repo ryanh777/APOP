@@ -26,7 +26,7 @@ public class SurveyJSON extends JSONObject {
 
     // Make survey JSON object to submit to S3
     public static SurveyJSON makeSurveyJSON(String org, String deviceID, String petName, String petType,
-                                               int age, int weight, String sex, String breed,
+                                               double age, int weight, String sex, String breed,
                                                int numDogs, int numCats, int ownerWeight, int bcss,
                                                String medical, String comments) {
 

@@ -65,9 +65,13 @@ public class SubmissionActivity extends AppCompatActivity {
                 String org = Credentials.getOrg();
                 String deviceID = Credentials.getDeviceID();
 
+                // Round these fields
+                double roundedAge = ((int) ((age + 0.05)*10) /10.0);
+                int roundedWeight = (int) (weight + 0.5);
+
                 // make JSON
                 SurveyJSON submissionJSON = SurveyJSON.makeSurveyJSON(org, deviceID,
-                        petName, petType, (int) (age + 0.5), (int) (weight + 0.5), sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
+                        petName, petType, roundedAge, roundedWeight, sex, breed, numDogs, numCats, ownerWeight, bcss, medical, comments);
 
                 // upload JSON file
                 SurveySubmitter.uploadFile(getApplicationContext(), submissionJSON);

@@ -24,7 +24,7 @@
             android:id="@+id/accountCreateTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create new Account"
+            android:text="Create New Account"
             android:textColor="@color/colorWhite"
             android:textAlignment="center"
             android:textSize="40sp"

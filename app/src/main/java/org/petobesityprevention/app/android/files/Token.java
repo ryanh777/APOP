@@ -29,8 +29,8 @@ public class Token {
     private static String tokenContents() throws JSONException {
         JSONObject userJSON = User.makeUserJSON(Credentials.getOrg(), Credentials.getDeviceID(), Credentials.getModel());
 
-        // Set expiration date to one month from current date
-        LocalDate expiration = LocalDate.now().plusMonths(1).plusDays(1);
+        // Set expiration date to three months from current date
+        LocalDate expiration = LocalDate.now().plusMonths(3);
 
         // add expiration date to json
         userJSON.put("expires", expiration);

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +22,7 @@ public class AccountCreationActivity extends AppCompatActivity {
     private String username, password, password2, org, address, phone, email;
     private View loadingSplash;
     private EditText usernameText;
+    private boolean creating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class AccountCreationActivity extends AppCompatActivity {
 
         loadingSplash = findViewById(R.id.id_loadingPanel);
         AccountCreationActivity activity = this;
+
+        creating = false;
 
         usernameText = findViewById(R.id.id_username);
         EditText pwText = findViewById(R.id.id_pw);
@@ -69,7 +71,7 @@ public class AccountCreationActivity extends AppCompatActivity {
                 } else {
                     // Download to check if username taken already
                     CallbackActivityDownloader downloader = new CallbackActivityDownloader(activity);
-                    downloader.getFileForCreation(username, "username.tmp", getApplicationContext());
+                    downloader.getFileForCreation("Orgs/"+ username + ".json", "username.tmp", getApplicationContext());
 
                     // Popup splash
                     loadingSplash.setVisibility(View.VISIBLE);
@@ -82,11 +84,11 @@ public class AccountCreationActivity extends AppCompatActivity {
     public void callback(boolean result) {
 
         loadingSplash.setVisibility(View.INVISIBLE);
-        Log.i("APOPappCreation", "Got called back!");
+        Log.i("APOPappCreation", "Got called back: " + result);
 
         File usernameCheckFile = new File(getApplicationContext().getFilesDir()+ "/username.tmp");
 
-        if(usernameCheckFile.exists() || !result) {
+        if (usernameCheckFile.exists() || result) {
             // Username taken
             Log.e("APOPApp", "Username taken: " + username);
 
@@ -96,8 +98,13 @@ public class AccountCreationActivity extends AppCompatActivity {
 
             usernameCheckFile.delete();
         }
+        else if(!creating) {
+
+            creating = true;
+        }
         else {
             Log.i("APOPApp", "Creating Account");
+
 
             // Hash the credentials to store the
             String hashedPassword = Hash.hashPassword(password);
