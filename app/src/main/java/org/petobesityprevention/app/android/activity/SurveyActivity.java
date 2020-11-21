@@ -90,17 +90,25 @@ public class SurveyActivity extends AppCompatActivity {
         RadioButton dogButton = findViewById(R.id.id_pet_type_dog);
         RadioButton catButton = findViewById(R.id.id_pet_type_cat);
 
-        // Set dropdown to selected species
+        // Number of _ seekbars
+        SeekBar numDogsBar = findViewById(R.id.id_num_dogs);
+        SeekBar numCatsBar = findViewById(R.id.id_num_cats);
+
+        // Set dropdown and auto-increment counter of selected species
         dogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinner.setAdapter(adapter_dog);
+                numDogsBar.setProgress(1);
+                numCatsBar.setProgress(0);
             }
         });
         catButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinner.setAdapter(adapter_cat);
+                numCatsBar.setProgress(1);
+                numDogsBar.setProgress(0);
             }
         });
 

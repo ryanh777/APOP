@@ -275,37 +275,37 @@
             android:layout_marginBottom="@dimen/gap_margin">
             <TextView
                 android:text="0"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="1"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="2"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="3"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="4"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="5+"
-                android:layout_weight="1"
+                android:layout_weight="6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
@@ -343,37 +343,37 @@
             android:layout_marginBottom="@dimen/gap_margin">
             <TextView
                 android:text="0"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="1"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="2"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="3"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="4"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:text="5+"
-                android:layout_weight="1"
+                android:layout_weight="6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
@@ -395,8 +395,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:minHeight="10dp"
-            android:max="4"
-            android:progress="2"
+            android:max="3"
+            android:progress="1"
             android:thumb="@drawable/seekbar_thumb"
             android:tickMark="@drawable/seekbar_tickmark"
             android:progressTint="@android:color/transparent"
@@ -411,37 +411,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_margin">
             <TextView
-                android:text="1"
-                android:layout_weight="1"
-                android:layout_marginEnd="13dp"
-                android:layout_width="wrap_content"
+                android:text="Thin"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:text="2"
-                android:layout_weight="1"
-                android:layout_marginEnd="13dp"
-                android:layout_width="wrap_content"
+                android:text="Normal"
+                android:layout_weight="3"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:text="3"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:text="Overweight"
+                android:layout_weight="3"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:text="4"
-                android:layout_weight="1"
-                android:layout_marginStart="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-            <TextView
-                android:text="5"
-                android:layout_weight="1"
-                android:layout_marginStart="13dp"
-                android:layout_width="wrap_content"
+                android:text="Obese"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
         </LinearLayout>
