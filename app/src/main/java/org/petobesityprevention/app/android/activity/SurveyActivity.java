@@ -24,22 +24,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import org.petobesityprevention.app.android.R;
-import org.petobesityprevention.app.android.activity.SubmissionActivity;
 
 import java.io.File;
 
 public class SurveyActivity extends AppCompatActivity {
 
-    private Integer REQUEST_CODE = 123;
+    private final int REQUEST_CODE_MAIN = 123;
     private ImageView mImageView1;
     private ImageView mImageView2;
     private ImageView mImageView3;
     private LinearLayout mImageViews;
     private LinearLayout mImageButtons;
-    private Button mImageButton1;
-    private Button mImageButton2;
-    private Button mImageButton3;
     private CardView mCamera;
+
+    private boolean photosPresent = false;
+
+    private File image_1;
+    private File image_2;
+    private File image_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +73,10 @@ public class SurveyActivity extends AppCompatActivity {
         spinner.setAdapter(adapter_empty);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 // Item selected, set text to the value
                 TextView spinnerText = findViewById(R.id.id_spinner_text);
-                spinnerText.setText(adapterView.getItemAtPosition(i).toString());
+                spinnerText.setText(adapterView.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -82,9 +84,6 @@ public class SurveyActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-
-        TextView spinnerText = findViewById(R.id.id_spinner_text);
-        spinnerText.setText("");
 
         // Species buttons
         RadioButton dogButton = findViewById(R.id.id_pet_type_dog);
@@ -112,45 +111,18 @@ public class SurveyActivity extends AppCompatActivity {
             }
         });
 
+
         Button imageButton = findViewById(R.id.id_image);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent imageCaptureActivity = new Intent(getApplicationContext(), ImageCaptureActivity.class);
-                imageCaptureActivity.putExtra("ID", "123");
-                startActivityForResult(imageCaptureActivity, REQUEST_CODE);
-            }
-        });
+        imageButton.setOnClickListener(new ImageButtonRequestClickListener(123));
 
-        mImageButton1 = findViewById(R.id.imageButton1);
-        mImageButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent imageCaptureActivity = new Intent(getApplicationContext(), ImageCaptureActivity.class);
-                imageCaptureActivity.putExtra("ID", "1");
-                startActivityForResult(imageCaptureActivity, 1);
-            }
-        });
+        Button mImageButton1 = findViewById(R.id.imageButton1);
+        mImageButton1.setOnClickListener(new ImageButtonRequestClickListener(1));
 
-        mImageButton2 = findViewById(R.id.imageButton2);
-        mImageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent imageCaptureActivity = new Intent(getApplicationContext(), ImageCaptureActivity.class);
-                imageCaptureActivity.putExtra("ID", "2");
-                startActivityForResult(imageCaptureActivity, 2);
-            }
-        });
+        Button mImageButton2 = findViewById(R.id.imageButton2);
+        mImageButton2.setOnClickListener(new ImageButtonRequestClickListener(2));
 
-        mImageButton3 = findViewById(R.id.imageButton3);
-        mImageButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent imageCaptureActivity = new Intent(getApplicationContext(), ImageCaptureActivity.class);
-                imageCaptureActivity.putExtra("ID", "3");
-                startActivityForResult(imageCaptureActivity, 3);
-            }
-        });
+        Button mImageButton3 = findViewById(R.id.imageButton3);
+        mImageButton3.setOnClickListener(new ImageButtonRequestClickListener(3));
 
         // Submit button
         Button submit = findViewById(R.id.id_submit);
@@ -163,7 +135,7 @@ public class SurveyActivity extends AppCompatActivity {
                 RadioGroup petTypeGroup = findViewById(R.id.id_pet_type_group);
                 int petTypeID = petTypeGroup.getCheckedRadioButtonId();
                 RadioButton petType = findViewById(petTypeID);
-                Spinner breed = findViewById(R.id.id_breed);
+                //Spinner breed = findViewById(R.id.id_breed);
                 EditText age = findViewById(R.id.id_age);
                 RadioGroup sexGroup = findViewById(R.id.id_sex_group);
                 int sexID = sexGroup.getCheckedRadioButtonId();
@@ -222,13 +194,22 @@ public class SurveyActivity extends AppCompatActivity {
                     validFields = false;
                 }
 
+                // Next move is to submission activity, first we need to send references to the data that is being confirmed
+                Intent submissionActivity = new Intent(getApplicationContext(), SubmissionActivity.class);
+
+                submissionActivity.putExtra("PHOTOS_PRESENT", photosPresent);
+
+                if (photosPresent) {
+                    submissionActivity.putExtra("IMAGE_1", image_1.getAbsolutePath());
+                    submissionActivity.putExtra("IMAGE_2", image_2.getAbsolutePath());
+                    submissionActivity.putExtra("IMAGE_3", image_3.getAbsolutePath());
+                }
 
                 if (validFields) {
                     // Set the field values to pass to the submission activity
-                    Intent submissionActivity = new Intent(getApplicationContext(), SubmissionActivity.class);
                     submissionActivity.putExtra("PET_NAME", petName.getText().toString());
                     submissionActivity.putExtra("PET_TYPE", petType.getText().toString());
-                    submissionActivity.putExtra("BREED", breed.getSelectedItem().toString());
+                    //submissionActivity.putExtra("BREED", breed.getSelectedItem().toString());
                     submissionActivity.putExtra("AGE", Double.parseDouble(age.getText().toString()));
                     submissionActivity.putExtra("WEIGHT", Double.parseDouble(weight.getText().toString()));
                     submissionActivity.putExtra("SEX", sex.getText().toString());
@@ -251,41 +232,72 @@ public class SurveyActivity extends AppCompatActivity {
         });
     }
 
+    // Image button click listener handles the ImageCaptureActivity start with the relevant photo number (1-3)
+    class ImageButtonRequestClickListener implements View.OnClickListener {
+
+        private final int requestCode;
+        private final String codeValue;
+
+        // Constructor initializes image id code for the image capture
+        public ImageButtonRequestClickListener(int code) {
+            this.requestCode = code;
+            this.codeValue = "" + code;
+        }
+
+        @Override
+        public void onClick(View v) {
+            // Put the extra (photo id info) and start the image capture activity
+            Intent imageCaptureActivity = new Intent(getApplicationContext(), ImageCaptureActivity.class);
+            imageCaptureActivity.putExtra("ID", codeValue);
+            startActivityForResult(imageCaptureActivity, requestCode);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            //mComments.setText("dude");
-            //mComments.setText(data.getStringExtra("test"));
-//            Bitmap bitmap1 = BitmapFactory.decodeByteArray(data.getByteArrayExtra("byteArray1"),0,data.getByteArrayExtra("byteArray1").length);
-//            Bitmap bitmap2 = BitmapFactory.decodeByteArray(data.getByteArrayExtra("byteArray2"),0,data.getByteArrayExtra("byteArray2").length);
-//            Bitmap bitmap3 = BitmapFactory.decodeByteArray(data.getByteArrayExtra("byteArray3"),0,data.getByteArrayExtra("byteArray3").length);
 
-            File file1 = new File(data.getStringExtra("path1"));
-            File file2 = new File(data.getStringExtra("path2"));
-            File file3 = new File(data.getStringExtra("path3"));
+        assert(data != null);
 
-            Bitmap bitmap1 = BitmapFactory.decodeFile(file1.getAbsolutePath());
-            Bitmap bitmap2 = BitmapFactory.decodeFile(file2.getAbsolutePath());
-            Bitmap bitmap3 = BitmapFactory.decodeFile(file3.getAbsolutePath());
+        // main image section, when all three are first taken
+        if (requestCode == REQUEST_CODE_MAIN) {
 
-            mImageView1.setImageBitmap(bitmap1);
-            mImageView2.setImageBitmap(bitmap2);
-            mImageView3.setImageBitmap(bitmap3);
+            // update flag
+            photosPresent = true;
+
+            // set image files
+            image_1 = new File(data.getStringExtra("path1"));
+            image_2 = new File(data.getStringExtra("path2"));
+            image_3 = new File(data.getStringExtra("path3"));
+
+            // Set the image views for the photo previews on the survey screen
+            mImageView1.setImageBitmap(BitmapFactory.decodeFile(
+                    new File(data.getStringExtra("path1")).getAbsolutePath()));
+            mImageView2.setImageBitmap(BitmapFactory.decodeFile(
+                    new File(data.getStringExtra("path2")).getAbsolutePath()));
+            mImageView3.setImageBitmap(BitmapFactory.decodeFile(
+                    new File(data.getStringExtra("path3")).getAbsolutePath()));
+
+            // Remove camera "take photos" button
             mCamera.setVisibility(View.GONE);
+
+            // show the image previews and retake buttons
             mImageViews.setVisibility(View.VISIBLE);
             mImageButtons.setVisibility(View.VISIBLE);
-        } else if (requestCode == 1) {
-            File file = new File(data.getStringExtra("path"));
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        }
+
+        // Subsequent individual image requests set the new image file path & update the view
+        else if (requestCode == 1) {
+            image_1 = new File(data.getStringExtra("path"));
+            Bitmap bitmap = BitmapFactory.decodeFile(image_1.getAbsolutePath());
             mImageView1.setImageBitmap(bitmap);
         } else if (requestCode == 2) {
-            File file = new File(data.getStringExtra("path"));
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            File image_2 = new File(data.getStringExtra("path"));
+            Bitmap bitmap = BitmapFactory.decodeFile(image_2.getAbsolutePath());
             mImageView2.setImageBitmap(bitmap);
         } else if (requestCode == 3) {
-            File file = new File(data.getStringExtra("path"));
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            File image_3 = new File(data.getStringExtra("path"));
+            Bitmap bitmap = BitmapFactory.decodeFile(image_3.getAbsolutePath());
             mImageView3.setImageBitmap(bitmap);
         }
     }

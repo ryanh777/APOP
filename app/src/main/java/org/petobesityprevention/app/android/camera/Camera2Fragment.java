@@ -32,6 +32,7 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -40,6 +41,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -248,7 +250,6 @@ public class Camera2Fragment extends Fragment
             buffer.get(bytes);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-            //int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
@@ -257,11 +258,8 @@ public class Camera2Fragment extends Fragment
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //mImageView.setImageBitmap(rotatedBitmap);
 
-                    //Toast.makeText(Camera2Fragment.this.getContext(), "i think it worked", Toast.LENGTH_LONG).show();
-
-                    AlertDialog.Builder alertPic = new AlertDialog.Builder(Camera2Fragment.this.getContext());
+                    AlertDialog.Builder alertPic = new AlertDialog.Builder(Camera2Fragment.this.getContext(), R.style.MyDialogTheme);
                     LayoutInflater factory = LayoutInflater.from(Camera2Fragment.this.getContext());
                     final View view  = factory.inflate(R.layout.alert_picture_confirm, null);
                     ImageView alertIV = view.findViewById(R.id.alert_imageview);
@@ -270,9 +268,8 @@ public class Camera2Fragment extends Fragment
                     alertPic.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+
                             String id = getActivity().getIntent().getStringExtra("ID");
-
-
 
                             if (id.equals("123")) {
 
@@ -290,7 +287,6 @@ public class Camera2Fragment extends Fragment
                                     File imageFile2 = new File(outputDir, "image2.jpg");
                                     File imageFile3 = new File(outputDir, "image3.jpg");
 
-                                    //ByteArrayOutputStream bs1 = new ByteArrayOutputStream();
                                     BitmapDrawable bitmapDrawable1 = (BitmapDrawable) mImageView1.getDrawable();
                                     BitmapDrawable bitmapDrawable2 = (BitmapDrawable) mImageView2.getDrawable();
 
@@ -314,23 +310,6 @@ public class Camera2Fragment extends Fragment
                                     resultIntent.putExtra("path2", imageFile2.getAbsolutePath());
                                     resultIntent.putExtra("path3", imageFile3.getAbsolutePath());
 
-
-
-
-//                                ByteArrayOutputStream bs1 = new ByteArrayOutputStream();
-//                                BitmapDrawable bitmapDrawable1 = (BitmapDrawable) mImageView1.getDrawable();
-//                                bitmapDrawable1.getBitmap().compress(Bitmap.CompressFormat.PNG, 50, bs1);
-//                                resultIntent.putExtra("byteArray1", bs1.toByteArray());
-//
-//                                ByteArrayOutputStream bs2 = new ByteArrayOutputStream();
-//                                BitmapDrawable bitmapDrawable2 = (BitmapDrawable) mImageView2.getDrawable();
-//                                bitmapDrawable1.getBitmap().compress(Bitmap.CompressFormat.PNG, 50, bs2);
-//                                resultIntent.putExtra("byteArray2", bs2.toByteArray());
-//
-//                                ByteArrayOutputStream bs3 = new ByteArrayOutputStream();
-//                                rotatedBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs3);
-//                                resultIntent.putExtra("byteArray3", bs3.toByteArray());
-
                                     getActivity().setResult(123, resultIntent);
                                     getActivity().finish();
                                 }
@@ -353,23 +332,6 @@ public class Camera2Fragment extends Fragment
 
                                 resultIntent.putExtra("path", imageFile.getAbsolutePath());
 
-
-
-
-//                                ByteArrayOutputStream bs1 = new ByteArrayOutputStream();
-//                                BitmapDrawable bitmapDrawable1 = (BitmapDrawable) mImageView1.getDrawable();
-//                                bitmapDrawable1.getBitmap().compress(Bitmap.CompressFormat.PNG, 50, bs1);
-//                                resultIntent.putExtra("byteArray1", bs1.toByteArray());
-//
-//                                ByteArrayOutputStream bs2 = new ByteArrayOutputStream();
-//                                BitmapDrawable bitmapDrawable2 = (BitmapDrawable) mImageView2.getDrawable();
-//                                bitmapDrawable1.getBitmap().compress(Bitmap.CompressFormat.PNG, 50, bs2);
-//                                resultIntent.putExtra("byteArray2", bs2.toByteArray());
-//
-//                                ByteArrayOutputStream bs3 = new ByteArrayOutputStream();
-//                                rotatedBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs3);
-//                                resultIntent.putExtra("byteArray3", bs3.toByteArray());
-
                                 String resultCode = getActivity().getIntent().getStringExtra("ID");
                                 getActivity().setResult(Integer.parseInt(resultCode), resultIntent);
                                 getActivity().finish();
@@ -380,7 +342,9 @@ public class Camera2Fragment extends Fragment
                         public void onClick(DialogInterface dialogInterface, int i) {
                         }
                     });
-                    alertPic.show();
+
+                    Dialog pictureConfirm = alertPic.create();
+                    pictureConfirm.show();
                 }
             });
             image.close();
@@ -449,7 +413,6 @@ public class Camera2Fragment extends Fragment
                         }
                     }
 
-                    /// HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE///
                     else {
                         mState = STATE_PICTURE_TAKEN;
                         captureStillPicture();
@@ -1052,7 +1015,7 @@ public class Camera2Fragment extends Fragment
             case R.id.info: {
                 Activity activity = getActivity();
                 if (null != activity) {
-                    new AlertDialog.Builder(activity)
+                    new AlertDialog.Builder(activity) // , R.style.MyDialogTheme
                             .setMessage("R.string.intro_message")
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
@@ -1146,7 +1109,7 @@ public class Camera2Fragment extends Fragment
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Activity activity = getActivity();
-            return new AlertDialog.Builder(activity)
+            return new AlertDialog.Builder(activity) //, R.style.MyDialogTheme
                     .setMessage(getArguments().getString(ARG_MESSAGE))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
@@ -1168,7 +1131,7 @@ public class Camera2Fragment extends Fragment
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Fragment parent = getParentFragment();
-            return new AlertDialog.Builder(getActivity())
+            return new AlertDialog.Builder(getActivity()) //, R.style.MyDialogTheme
                     .setMessage(R.string.request_permission)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
